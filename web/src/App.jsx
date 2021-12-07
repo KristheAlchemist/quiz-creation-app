@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import { Route, Routes } from 'react-router';
 import UserProfile from './components/UserProfile';
+import TestPage from './components/TestPage';
 import logo from './logo.svg';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<UserProfile />} />
         <Route path="/profile" element={<UserProfile />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
     </div>
   );
