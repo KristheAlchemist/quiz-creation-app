@@ -14,6 +14,7 @@ namespace backend.Tests.Utils
     {
         public static readonly string USER_NAME = "Kris Robinson";
         public static readonly string TEST_TITLE = "Test 1";
+        public static readonly string QUESTION_TEXT = "Why did the chicken cross the road?";
 
         public static Mock<HttpRequest> CreateMockRequest(string method, object body = null, Dictionary<string, string> querystring = null)
         {
@@ -59,6 +60,9 @@ namespace backend.Tests.Utils
             db.Users.Add(user);
 
             var test = new Test(TEST_TITLE);
+            db.Tests.Add(test);
+
+            var question = new Question(QUESTION_TEXT);
             db.Tests.Add(test);
 
             await db.SaveChangesAsync();

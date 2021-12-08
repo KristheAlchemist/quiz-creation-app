@@ -16,5 +16,7 @@ namespace backend.Models
 
         public virtual DbSet<Test> Tests { get; set; }
 
+        public virtual DbSet<Question> Questions { get; set; }
+
     }
 }
