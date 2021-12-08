@@ -24,7 +24,14 @@ const TestPage = () => {
 
   return (
     <div>
-      <h2>{title}</h2>
+      <h1>{title}</h1>
+      <form>
+        <label>
+          1.
+          <input type="text" name="name" />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     </div>
   );
 };

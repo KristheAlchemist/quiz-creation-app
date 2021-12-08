@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import TestPage from './TestPage';
 
 const testDetails = {
-  name: 'Test 1',
+  title: 'Test 1',
 };
 
 test('renders the test page', async () => {
