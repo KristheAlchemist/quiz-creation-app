@@ -13,6 +13,11 @@ function App() {
         <h3>
           Quiz Creation App
         </h3>
+        <h4>
+          <a href="/profile" className="App-link">Profile</a>
+          | |
+          <a href="/test" className="App-link">Test Page</a>
+        </h4>
       </header>
       <Routes>
         <Route path="/" element={<UserProfile />} />
