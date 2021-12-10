@@ -48,8 +48,6 @@ namespace backend.Tests.Controllers
                 db.Tests.Remove(db.Tests.First());
                 await db.SaveChangesAsync();
 
-                var request = TestUtils.CreateMockRequest("GET");
-
                 var response = await testObject.Get();
 
                 response.Should().BeOfType<NotFoundResult>();
