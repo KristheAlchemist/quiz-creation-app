@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Question from './Question';
 
 const TestPage = () => {
   const [error, setError] = useState(null);
@@ -32,14 +33,9 @@ const TestPage = () => {
   return (
     <div>
       <h1>{title}</h1>
-      <form>
-        <label>
-          1. Why did the chicken cross the road?
-          <input type="text" name="name" />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <Question />
     </div>
+
   );
 };
 
