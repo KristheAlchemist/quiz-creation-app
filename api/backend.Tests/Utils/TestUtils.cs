@@ -15,6 +15,7 @@ namespace backend.Tests.Utils
         public static readonly string USER_NAME = "Kris Robinson";
         public static readonly string TEST_TITLE = "Test 1";
         public static readonly string QUESTION_TEXT = "Why did the chicken cross the road?";
+        public static readonly string QUESTION_TYPE = "MultipleChoice";
 
         public static async Task<QuizCreationDbContext> GetTestDbContext()
         {
@@ -28,7 +29,7 @@ namespace backend.Tests.Utils
             var test = new Test(TEST_TITLE);
             db.Tests.Add(test);
 
-            var question = new Question(QUESTION_TEXT);
+            var question = new Question(QUESTION_TEXT, QUESTION_TYPE);
             db.Questions.Add(question);
 
             await db.SaveChangesAsync();
