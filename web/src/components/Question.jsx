@@ -1,11 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState /* useForm */ } from 'react';
+import React, { useEffect, useState } from 'react';
+import MultipleChoice from './QuestionTypes/MultipleChoice';
+import TrueFalse from './QuestionTypes/TrueFalse';
 
 const Question = () => {
   const [error, setError] = useState(null);
   const [text, setText] = useState('');
+  const [questionType, setQuestionType] = useState('');
   const [loading, setLoading] = useState(false);
-  //   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +15,15 @@ const Question = () => {
         setLoading(true);
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Question`);
         setText(data.text);
+      } catch (err) {
+        setError(err);
+      }
+      setLoading(false);
+
+      try {
+        setLoading(true);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Question`);
+        setQuestionType(data.questionType);
       } catch (err) {
         setError(err);
       }
@@ -30,14 +41,30 @@ const Question = () => {
     return <h1>Loading...</h1>;
   }
 
+  if (questionType === 'ShortAnswer') {
+    return (
+      <div>
+        <h1>{text}</h1>
+        <form action="" method="post">
+          <p>Please answer here:</p>
+          <input type="text" />
+          <input type="submit" />
+        </form>
+      </div>
+    );
+  }
+  if (questionType === 'TrueFalse') {
+    return (
+      <div>
+        <h1>{text}</h1>
+        <TrueFalse />
+      </div>
+    );
+  }
   return (
     <div>
-      <form>
-        <h1>{text}</h1>
-        <label>
-          <input type="submit" />
-        </label>
-      </form>
+      <h1>{text}</h1>
+      <MultipleChoice />
     </div>
   );
 };
