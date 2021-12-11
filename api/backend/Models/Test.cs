@@ -7,6 +7,8 @@ namespace backend.Models
         [Key]
         public long Id { get; set; }
         public string Title { get; set; }
+        public virtual string? Question { get; set; }
+
         public Test(string title)
         {
             Title = title;
