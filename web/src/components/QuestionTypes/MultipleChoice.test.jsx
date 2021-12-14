@@ -14,5 +14,7 @@ test('renders answer options', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Question`).reply(200, testDetails);
   render(<MultipleChoice />);
-  expect(await screen.findByText(testDetails.choices[0])).toBeInTheDocument();
+  expect(await screen
+    .findByText(testDetails.choices[0] && testDetails.choices[1] && testDetails.choices[2]))
+    .toBeInTheDocument();
 });
