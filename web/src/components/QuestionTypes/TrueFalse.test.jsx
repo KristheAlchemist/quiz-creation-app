@@ -15,6 +15,6 @@ test('renders answer options', async () => {
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Question`).reply(200, testDetails);
   render(<TrueFalse />);
   expect(await screen
-    .findByText(testDetails.choices[0] && testDetails.choices[0]))
+    .findByText(testDetails.choices[0] && testDetails.choices[1]))
     .toBeInTheDocument();
 });
