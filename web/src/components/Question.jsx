@@ -16,14 +16,6 @@ const Question = () => {
         setLoading(true);
         const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Question`);
         setText(data.text);
-      } catch (err) {
-        setError(err);
-      }
-      setLoading(false);
-
-      try {
-        setLoading(true);
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Question`);
         setQuestionType(data.questionType);
       } catch (err) {
         setError(err);
