@@ -29,7 +29,7 @@ namespace backend.Tests.Utils
             var test = new Test(TEST_TITLE);
             db.Tests.Add(test);
 
-            var question = new Question(QUESTION_TEXT, QUESTION_TYPE);
+            var question = new Question(QUESTION_TEXT);
             db.Questions.Add(question);
 
             await db.SaveChangesAsync();

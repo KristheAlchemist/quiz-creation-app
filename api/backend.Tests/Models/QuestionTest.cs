@@ -16,9 +16,8 @@ namespace backend.Tests.Models
         public void WhenQuestionConstructedWithTitleThenTitleIsSetCorrectly()
         {
             var expectedText = "Why did the chicken cross the road?";
-            var questionType = "MultipleChoice";
 
-            var result = new Question(expectedText, questionType);
+            var result = new Question(expectedText);
 
             result.Text.Should().Be(expectedText);
         }

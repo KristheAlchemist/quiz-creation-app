@@ -7,16 +7,16 @@ namespace backend.Models
         [Key]
         public long Id { get; set; }
         public string Text { get; set; }
-        public string? QuestionType { get; set; }
-        // public ICollection<string>? Choices { get; set; }
-        public string? Answer { get; set; }
+        public string QuestionType { get; set; }
+        public ICollection<Choices> Choices { get; set; }
+        // Once I figure this part out, I can map the choices to the Question subcomponents.
+        public string Answer { get; set; }
 
-        public Question(string text, string questionType)
+        public Question(string text)
         {
             Text = text;
-            QuestionType = questionType;
         }
 
-        public virtual Test? Test { get; set; }
+        public virtual Test Test { get; set; }
     }
 }
