@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import MultipleChoice from './QuestionTypes/MultipleChoice';
+import ShortAnswer from './QuestionTypes/ShortAnswer';
 import TrueFalse from './QuestionTypes/TrueFalse';
 
 const Question = () => {
@@ -34,7 +35,7 @@ const Question = () => {
   }, []);
 
   if (error) {
-    return <div>Oops! Could not fetch the test page.</div>;
+    return <div>Oops! Could not fetch the question.</div>;
   }
 
   if (loading) {
@@ -45,11 +46,7 @@ const Question = () => {
     return (
       <div>
         <h1>{text}</h1>
-        <form action="" method="post">
-          <p>Please answer here:</p>
-          <input type="text" />
-          <input type="submit" />
-        </form>
+        <ShortAnswer />
       </div>
     );
   }
