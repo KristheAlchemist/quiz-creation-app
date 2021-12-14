@@ -8,16 +8,16 @@ namespace backend.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.InsertData("Questions", "Text", "Why did the chicken cross the road?");
-            migrationBuilder.InsertData("Questions", "QuestionType", "MultipleChoice");
-            migrationBuilder.InsertData("Questions", "Answer", "To get to the other side.");
+            migrationBuilder.InsertData("Question", "Text", "Why did the chicken cross the road?");
+            migrationBuilder.InsertData("Question", "QuestionType", "MultipleChoice");
+            migrationBuilder.InsertData("Question", "Answer", "To get to the other side.");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData("Questions", "Text", "Why did the chicken cross the road?");
-            migrationBuilder.DeleteData("Questions", "QuestionType", "MultipleChoice");
-            migrationBuilder.DeleteData("Questions", "Answer", "To get to the other side.");
+            migrationBuilder.DeleteData("Question", "Text", "Why did the chicken cross the road?");
+            migrationBuilder.DeleteData("Question", "QuestionType", "MultipleChoice");
+            migrationBuilder.DeleteData("Question", "Answer", "To get to the other side.");
         }
     }
 }
