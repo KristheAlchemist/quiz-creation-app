@@ -20,7 +20,7 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            User? user = null;
+            User user = null;
 
             try
             {
