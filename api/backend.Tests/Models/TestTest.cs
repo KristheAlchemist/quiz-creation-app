@@ -17,7 +17,7 @@ namespace backend.Tests.Models
         {
             var expectedTitle = "Test 1";
 
-            var result = new Test(expectedTitle);
+            var result = new Quiz(expectedTitle);
 
             result.Title.Should().Be(expectedTitle);
         }

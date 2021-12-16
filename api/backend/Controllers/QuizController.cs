@@ -6,12 +6,12 @@ namespace backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TestController : ControllerBase
+    public class QuizController : ControllerBase
     {
         private readonly QuizCreationDbContext _db;
-        private readonly ILogger<TestController> _logger;
+        private readonly ILogger<QuizController> _logger;
 
-        public TestController(QuizCreationDbContext db, ILogger<TestController> logger)
+        public QuizController(QuizCreationDbContext db, ILogger<QuizController> logger)
         {
             _db = db;
             _logger = logger;
@@ -20,11 +20,11 @@ namespace backend.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            Test test = null;
+            Quiz quiz = null;
 
             try
             {
-                test = await _db.Tests.FirstOrDefaultAsync();
+                quiz = await _db.Quizzes.FirstOrDefaultAsync();
             }
             catch (Exception e)
             {
@@ -32,12 +32,12 @@ namespace backend.Controllers
                 throw;
             }
 
-            if (test == null)
+            if (quiz == null)
             {
                 return new NotFoundResult();
             }
 
-            return new OkObjectResult(test);
+            return new OkObjectResult(quiz);
         }
     }
 }

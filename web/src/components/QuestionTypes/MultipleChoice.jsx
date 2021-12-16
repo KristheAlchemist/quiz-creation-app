@@ -1,8 +1,6 @@
-// import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const MultipleChoice = () => {
-  // const [answer, setAnswer] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -10,8 +8,6 @@ const MultipleChoice = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Question`);
-        // setAnswer(data.answer);
       } catch (err) {
         setError(err);
       }
@@ -40,7 +36,6 @@ const MultipleChoice = () => {
         <label htmlFor="c">To avoid lame and outdated jokes</label>
         <input type="submit" />
       </form>
-      {/* <p>{answer}</p> */}
     </div>
   );
 };

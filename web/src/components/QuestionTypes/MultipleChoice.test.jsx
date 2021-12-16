@@ -5,12 +5,12 @@ import { render, screen } from '@testing-library/react';
 import MultipleChoice from './MultipleChoice';
 
 const testDetails = {
-  title: 'Test 1',
+  title: 'Quiz 1',
   text: 'Why did the chicken cross the road?',
   choices: ['To not get eaten', 'To get to the other side', 'To avoid lame and outdated jokes'],
 };
 
-test('renders answer options', async () => {
+test('renders correct answer options', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Question`).reply(200, testDetails);
   render(<MultipleChoice />);

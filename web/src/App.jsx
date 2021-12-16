@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import { Route, Routes } from 'react-router';
 import UserProfile from './components/UserProfile';
-import TestPage from './components/TestPage';
+import QuizPage from './components/QuizPage';
 import logo from './logo.svg';
 
 function App() {
@@ -16,13 +16,13 @@ function App() {
         <h4>
           <a href="/profile" className="App-link">Profile</a>
           | |
-          <a href="/test" className="App-link">Test Page</a>
+          <a href="/quiz" className="App-link">Test Page</a>
         </h4>
       </header>
       <Routes>
         <Route path="/" element={<UserProfile />} />
         <Route path="/profile" element={<UserProfile />} />
-        <Route path="/test" element={<TestPage />} />
+        <Route path="/quiz" element={<QuizPage />} />
       </Routes>
     </div>
   );

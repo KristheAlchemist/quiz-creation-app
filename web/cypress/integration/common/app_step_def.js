@@ -10,8 +10,8 @@ Given('I am on the profile', () => {
   cy.visit('/profile');
 });
 
-Given('I am on the test', () => {
-  cy.visit('/test');
+Given('I am on the quiz', () => {
+  cy.visit('/quiz');
 });
 
 Then('I see {string}', (label) => {

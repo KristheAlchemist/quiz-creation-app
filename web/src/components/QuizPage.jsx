@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Question from './Question';
 
-const TestPage = () => {
+const QuizPage = () => {
   const [error, setError] = useState(null);
   const [title, setTitle] = useState('');
   const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ const TestPage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Test`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Quiz`);
         setTitle(data.title);
       } catch (err) {
         setError(err);
@@ -39,4 +39,4 @@ const TestPage = () => {
   );
 };
 
-export default TestPage;
+export default QuizPage;

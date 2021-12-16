@@ -2,18 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { render, screen } from '@testing-library/react';
-import TestPage from './TestPage';
+import QuizPage from './QuizPage';
 
 const testDetails = {
   id: 1,
-  title: 'Test 1',
+  title: 'Quiz 1',
   text: 'Why did the chicken cross the road?',
 };
 
-test('renders the test page', async () => {
+test('renders the quiz page', async () => {
   const mockApi = new MockAdapter(axios);
-  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Test`).reply(200, testDetails);
-  render(<TestPage />);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Quiz`).reply(200, testDetails);
+  render(<QuizPage />);
   // Is this right? Or am I giving myself a false pass?
   expect(await screen.findByText(testDetails.title)).toBeInTheDocument();
 });

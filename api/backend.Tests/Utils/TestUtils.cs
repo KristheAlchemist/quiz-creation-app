@@ -13,9 +13,11 @@ namespace backend.Tests.Utils
     public static class TestUtils
     {
         public static readonly string USER_NAME = "Kris Robinson";
-        public static readonly string TEST_TITLE = "Test 1";
+        public static readonly string QUIZ_TITLE = "Quiz 1";
         public static readonly string QUESTION_TEXT = "Why did the chicken cross the road?";
+        public static readonly string QUESTION_ANSWER = "To get to the other side.";
         public static readonly string QUESTION_TYPE = "MultipleChoice";
+        public static readonly string CHOICE_TEXT = "To get to the other side.";
 
         public static async Task<QuizCreationDbContext> GetTestDbContext()
         {
@@ -26,10 +28,10 @@ namespace backend.Tests.Utils
             var user = new User(USER_NAME);
             db.Users.Add(user);
 
-            var test = new Test(TEST_TITLE);
-            db.Tests.Add(test);
+            var quiz = new Quiz(QUIZ_TITLE);
+            db.Quizzes.Add(quiz);
 
-            var question = new Question(QUESTION_TEXT);
+            var question = new Question(QUESTION_TEXT, QUESTION_ANSWER);
             db.Questions.Add(question);
 
             await db.SaveChangesAsync();

@@ -12,16 +12,16 @@ using Xunit;
 
 namespace backend.Tests.Controllers
 {
-    public class TestControllerTest : IAsyncLifetime
+    public class QuizControllerTest : IAsyncLifetime
     {
 
-        private TestController testObject;
+        private QuizController testObject;
         private QuizCreationDbContext db;
 
         public async Task InitializeAsync()
         {
             db = await TestUtils.GetTestDbContext();
-            testObject = new TestController(db, new Mock<ILogger<TestController>>().Object);
+            testObject = new QuizController(db, new Mock<ILogger<QuizController>>().Object);
         }
 
         public async Task DisposeAsync()
@@ -29,7 +29,7 @@ namespace backend.Tests.Controllers
             await db.DisposeAsync();
         }
 
-        public class GetTest : TestControllerTest
+        public class GetTest : QuizControllerTest
         {
 
             [Fact]
@@ -38,14 +38,14 @@ namespace backend.Tests.Controllers
                 var response = await testObject.Get();
 
                 response.Should().BeOfType<OkObjectResult>();
-                var result = (response as OkObjectResult).Value as Test;
-                result.Title.Should().Be(TestUtils.TEST_TITLE);
+                var result = (response as OkObjectResult).Value as Quiz;
+                result.Title.Should().Be(TestUtils.QUIZ_TITLE);
             }
 
             [Fact]
             public async void WhenNoTest_ReturnsNotFound()
             {
-                db.Tests.Remove(db.Tests.First());
+                db.Quizzes.Remove(db.Quizzes.First());
                 await db.SaveChangesAsync();
 
                 var response = await testObject.Get();
@@ -58,11 +58,11 @@ namespace backend.Tests.Controllers
             {
                 var mockDb = new Mock<QuizCreationDbContext>();
 
-                mockDb.Setup(x => x.Tests).Throws(new Exception("Something Broke"));
+                mockDb.Setup(x => x.Quizzes).Throws(new Exception("Something Broke"));
 
-                var testObject = new TestController(mockDb.Object, new Mock<ILogger<TestController>>().Object);
+                var quizObject = new QuizController(mockDb.Object, new Mock<ILogger<QuizController>>().Object);
 
-                var exception = await Assert.ThrowsAsync<Exception>(() => testObject.Get());
+                var exception = await Assert.ThrowsAsync<Exception>(() => quizObject.Get());
 
                 exception.Message.Should().Be("Something Broke");
             }

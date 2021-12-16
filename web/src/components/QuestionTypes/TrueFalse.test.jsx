@@ -5,12 +5,12 @@ import { render, screen } from '@testing-library/react';
 import TrueFalse from './TrueFalse';
 
 const testDetails = {
-  title: 'Test 1',
+  title: 'Quiz 1',
   text: 'Luckytronics is the best!',
   choices: ['True', 'False'],
 };
 
-test('renders answer options', async () => {
+test('renders correct answer options', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Question`).reply(200, testDetails);
   render(<TrueFalse />);
