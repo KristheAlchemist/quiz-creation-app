@@ -10,12 +10,12 @@ using Xunit;
 
 namespace backend.Tests.Models
 {
-    public class TestTest
+    public class QuizTest
     {
         [Fact]
-        public void WhenTestConstructedWithTitleThenTitleIsSetCorrectly()
+        public void WhenQuizConstructedWithTitleThenTitleIsSetCorrectly()
         {
-            var expectedTitle = "Test 1";
+            var expectedTitle = "Quiz 1";
 
             var result = new Quiz(expectedTitle);
 

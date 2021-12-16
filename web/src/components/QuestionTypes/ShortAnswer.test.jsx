@@ -12,7 +12,7 @@ const testDetails = {
 
 test('renders short answer input', async () => {
   const mockApi = new MockAdapter(axios);
-  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/User`).reply(200, testDetails);
+  mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Question`).reply(200, testDetails);
   render(<ShortAnswer />);
-  expect(await screen.findByRole('input')).toBeInTheDocument();
+  expect(await screen.findByText('Please answer here:')).toBeInTheDocument();
 });
