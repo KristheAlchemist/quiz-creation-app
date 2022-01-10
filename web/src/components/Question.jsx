@@ -34,11 +34,11 @@ const Question = () => {
     return <h1>Loading...</h1>;
   }
 
-  if (questionType === 'ShortAnswer') {
+  if (questionType === 'MultipleChoice') {
     return (
       <div>
         <h1>{text}</h1>
-        <ShortAnswer />
+        <MultipleChoice />
       </div>
     );
   }
@@ -53,7 +53,7 @@ const Question = () => {
   return (
     <div>
       <h1>{text}</h1>
-      <MultipleChoice />
+      <ShortAnswer />
     </div>
   );
 };

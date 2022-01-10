@@ -23,7 +23,7 @@ const QuizPage = () => {
   }, []);
 
   if (error) {
-    return <div>Oops! Could not fetch the test page.</div>;
+    return <div>Oops! Could not fetch the quiz page.</div>;
   }
 
   if (loading) {
@@ -35,7 +35,6 @@ const QuizPage = () => {
       <h1>{title}</h1>
       <Question />
     </div>
-
   );
 };
 
