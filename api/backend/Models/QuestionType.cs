@@ -4,12 +4,7 @@ namespace backend.Models
 {
     public class QuestionType
     {
-        public long Id { get; set; }
-        public string Text { get; set; }
-
-        public QuestionType(string text)
-        {
-            Text = text;
-        }
+        public int Id { get; set; }
+        public string Choice { get; set; }
     }
 }

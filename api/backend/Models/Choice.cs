@@ -7,9 +7,9 @@ namespace backend.Models
         public long Id { get; set; }
         public string Text { get; set; }
 
-        public Choice(string text)
-        {
-            Text = text;
-        }
+        public int QuestionId { get; set; }
+
+        public virtual Question Question { get; set; }
+
     }
 }
