@@ -6,5 +6,8 @@ namespace backend.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
+
+        public virtual ICollection<UserQuiz> UserQuizzes { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

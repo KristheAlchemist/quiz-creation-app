@@ -14,18 +14,22 @@ namespace backend.Models
 
         public virtual DbSet<User> Users { get; set; }
 
+        public virtual DbSet<UserQuiz> UserQuizzes { get; set; }
+
         public virtual DbSet<Quiz> Quizzes { get; set; }
 
         public virtual DbSet<Question> Questions { get; set; }
 
         public virtual DbSet<QuestionType> QuestionTypes { get; set; }
 
-        // public virtual DbSet<Choice> Choices { get; set; }
-
-        public virtual DbSet<QuizQuestion> QuizQuestions { get; set; }
+        public virtual DbSet<Choice> Choices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.UserQuizzes)
+                .WithOne(q => q.User);
+
             modelBuilder.Entity<User>().HasData(
                 new User
                 {
