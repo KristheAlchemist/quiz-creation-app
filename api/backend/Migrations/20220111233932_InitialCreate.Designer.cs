@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Models;
 
@@ -11,9 +12,10 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(QuizCreationDbContext))]
-    partial class QuizCreationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220111233932_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,15 +67,6 @@ namespace backend.Migrations
                     b.HasIndex("QuestionTypeId");
 
                     b.ToTable("Questions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CorrectAnswer = "To get to the other side.",
-                            QuestionTypeId = 3,
-                            Text = "Why did the chicken cross the road?"
-                        });
                 });
 
             modelBuilder.Entity("backend.Models.QuestionType", b =>
@@ -123,13 +116,6 @@ namespace backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Quizzes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Title = "Quiz 1"
-                        });
                 });
 
             modelBuilder.Entity("backend.Models.User", b =>
@@ -146,13 +132,6 @@ namespace backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Kris Robinson"
-                        });
                 });
 
             modelBuilder.Entity("backend.Models.UserAnswer", b =>
@@ -199,7 +178,7 @@ namespace backend.Migrations
                     b.ToTable("UserQuizzes");
                 });
 
-            modelBuilder.Entity("QuestionQuiz", b =>
+            modelBuilder.Entity("QuizQuestion", b =>
                 {
                     b.Property<int>("QuestionsId")
                         .HasColumnType("int");
@@ -211,7 +190,7 @@ namespace backend.Migrations
 
                     b.HasIndex("QuizzesId");
 
-                    b.ToTable("QuestionQuiz");
+                    b.ToTable("QuizQuestion");
                 });
 
             modelBuilder.Entity("backend.Models.Choice", b =>
@@ -262,7 +241,7 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("QuestionQuiz", b =>
+            modelBuilder.Entity("QuizQuestion", b =>
                 {
                     b.HasOne("backend.Models.Question", null)
                         .WithMany()
