@@ -12,7 +12,7 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(QuizCreationDbContext))]
-    [Migration("20220112211247_InsertUserData")]
+    [Migration("20220112232652_InsertUserData")]
     partial class InsertUserData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Choice", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
@@ -118,6 +118,29 @@ namespace backend.Migrations
                     b.ToTable("Quizzes");
                 });
 
+            modelBuilder.Entity("backend.Models.QuizQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("QuizQuestions");
+                });
+
             modelBuilder.Entity("backend.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -178,21 +201,6 @@ namespace backend.Migrations
                     b.ToTable("UserQuizzes");
                 });
 
-            modelBuilder.Entity("QuizQuestion", b =>
-                {
-                    b.Property<int>("QuestionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuizzesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionsId", "QuizzesId");
-
-                    b.HasIndex("QuizzesId");
-
-                    b.ToTable("QuizQuestion");
-                });
-
             modelBuilder.Entity("backend.Models.Choice", b =>
                 {
                     b.HasOne("backend.Models.Question", "Question")
@@ -213,6 +221,25 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("QuestionType");
+                });
+
+            modelBuilder.Entity("backend.Models.QuizQuestion", b =>
+                {
+                    b.HasOne("backend.Models.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("backend.Models.Quiz", "Quiz")
+                        .WithMany("QuizQuestions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("backend.Models.UserAnswer", b =>
@@ -241,21 +268,6 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("QuizQuestion", b =>
-                {
-                    b.HasOne("backend.Models.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.Quiz", null)
-                        .WithMany()
-                        .HasForeignKey("QuizzesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("backend.Models.Question", b =>
                 {
                     b.Navigation("Choices");
@@ -263,6 +275,8 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Quiz", b =>
                 {
+                    b.Navigation("QuizQuestions");
+
                     b.Navigation("UserQuizzes");
                 });
 

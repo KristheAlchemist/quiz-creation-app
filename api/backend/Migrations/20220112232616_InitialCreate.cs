@@ -98,7 +98,7 @@ namespace backend.Migrations
                 name: "Choices",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     QuestionId = table.Column<int>(type: "int", nullable: false)
@@ -115,24 +115,26 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuizQuestion",
+                name: "QuizQuestions",
                 columns: table => new
                 {
-                    QuestionsId = table.Column<int>(type: "int", nullable: false),
-                    QuizzesId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuizId = table.Column<int>(type: "int", nullable: false),
+                    QuestionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuizQuestion", x => new { x.QuestionsId, x.QuizzesId });
+                    table.PrimaryKey("PK_QuizQuestions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_QuizQuestion_Questions_QuestionsId",
-                        column: x => x.QuestionsId,
+                        name: "FK_QuizQuestions_Questions_QuestionId",
+                        column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuizQuestion_Quizzes_QuizzesId",
-                        column: x => x.QuizzesId,
+                        name: "FK_QuizQuestions_Quizzes_QuizId",
+                        column: x => x.QuizId,
                         principalTable: "Quizzes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -178,14 +180,19 @@ namespace backend.Migrations
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuizQuestion_QuizzesId",
-                table: "QuizQuestion",
-                column: "QuizzesId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Questions_QuestionTypeId",
                 table: "Questions",
                 column: "QuestionTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuizQuestions_QuestionId",
+                table: "QuizQuestions",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuizQuestions_QuizId",
+                table: "QuizQuestions",
+                column: "QuizId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAnswer_UserQuizId",
@@ -209,7 +216,7 @@ namespace backend.Migrations
                 name: "Choices");
 
             migrationBuilder.DropTable(
-                name: "QuizQuestion");
+                name: "QuizQuestions");
 
             migrationBuilder.DropTable(
                 name: "UserAnswer");
