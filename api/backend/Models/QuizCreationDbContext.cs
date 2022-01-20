@@ -17,6 +17,7 @@ namespace backend.Models
         public virtual DbSet<UserQuiz> UserQuizzes { get; set; }
 
         public virtual DbSet<Quiz> Quizzes { get; set; }
+        public virtual DbSet<QuizQuestion> QuizQuestions { get; set; }
 
         public virtual DbSet<Question> Questions { get; set; }
 

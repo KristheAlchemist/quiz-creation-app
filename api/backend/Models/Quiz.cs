@@ -8,6 +8,6 @@ namespace backend.Models
         public string Title { get; set; }
 
         public virtual ICollection<UserQuiz> UserQuizzes { get; set; }
-        public virtual ICollection<Question> Questions { get; set; }
+        public virtual ICollection<QuizQuestion> QuizQuestions { get; set; }
     }
 }
