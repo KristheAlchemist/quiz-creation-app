@@ -1,39 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import MultipleChoice from './QuestionTypes/MultipleChoice';
 import ShortAnswer from './QuestionTypes/ShortAnswer';
 import TrueFalse from './QuestionTypes/TrueFalse';
 
-const Question = () => {
-  const [error, setError] = useState(null);
-  const [text, setText] = useState('');
-  const [questionType, setQuestionType] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Question`);
-        setText(data.text);
-        setQuestionType(data.questionType);
-      } catch (err) {
-        setError(err);
-      }
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  if (error) {
-    return <div>Oops! Could not fetch the question.</div>;
-  }
-
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
-
+const Question = ({ text, questionType }) => {
   if (questionType === 'MultipleChoice') {
     return (
       <div>
@@ -57,5 +28,10 @@ const Question = () => {
     </div>
   );
 };
+
+Question.propTypes = {
+  text: PropTypes.string.isRequired,
+  questionType: PropTypes.isRequired,
+}.isRequired;
 
 export default Question;
