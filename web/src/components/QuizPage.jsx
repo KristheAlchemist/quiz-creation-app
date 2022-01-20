@@ -1,18 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import Question from './Question';
 
 const QuizPage = () => {
   const [error, setError] = useState(null);
-  const [title, setTitle] = useState('');
+  const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Quiz`);
-        setTitle(data.title);
+        const { data } = await axios.get(`${process.env.REACT_APP_BASE_API}/api/Quiz/${id}`);
+        setQuiz(data);
       } catch (err) {
         setError(err);
       }
@@ -26,14 +28,18 @@ const QuizPage = () => {
     return <div>Oops! Could not fetch the quiz page.</div>;
   }
 
-  if (loading) {
+  if (loading || !quiz) {
     return <h1>Loading...</h1>;
   }
 
   return (
     <div>
-      <h1>{title}</h1>
-      <Question />
+      <h1>{quiz.title}</h1>
+      {quiz.questions.map(({
+        text, questionType, id: questionId, choices,
+      }) => (
+        <Question text={text} questionType={questionType} key={questionId} choices={choices} />
+      ))}
     </div>
   );
 };
