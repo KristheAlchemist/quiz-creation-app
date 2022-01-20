@@ -4,7 +4,7 @@ namespace backend.Models
 {
     public class Choice
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Text { get; set; }
         public int QuestionId { get; set; }
 
