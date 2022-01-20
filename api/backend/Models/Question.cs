@@ -11,6 +11,5 @@ namespace backend.Models
         public ICollection<Choice> Choices { get; set; }
 
         public virtual QuestionType QuestionType { get; set; }
-        public virtual ICollection<Quiz> Quizzes { get; set; }
     }
 }
