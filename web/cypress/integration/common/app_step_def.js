@@ -6,8 +6,8 @@ Given('I am on the app', () => {
   cy.visit('/');
 });
 
-Given('I am on the profile', () => {
-  cy.visit('/profile');
+Given('I am on the {string}', (page) => {
+  cy.visit(`/${page}`);
 });
 
 Given('I am on the quiz', () => {
