@@ -31,6 +31,7 @@ namespace backend
 
             services.AddDbContext<QuizCreationDbContext>(b =>
             {
+                b.UseLazyLoadingProxies();
                 b.UseSqlServer(Configuration.GetConnectionString("SqlDbConnection"));
             }, ServiceLifetime.Transient);
 
