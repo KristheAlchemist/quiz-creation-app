@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Models;
 
@@ -10,13 +11,14 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(QuizCreationDbContext))]
-    partial class QuizCreationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220120230512_AddedUserQuizIdToUserAnswer")]
+    partial class AddedUserQuizIdToUserAnswer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.1")
+                .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -164,9 +166,6 @@ namespace backend.Migrations
 
                     b.Property<string>("Answer")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
 
                     b.Property<int>("UserQuizId")
                         .HasColumnType("int");
