@@ -34,12 +34,21 @@ const QuizPage = () => {
 
   return (
     <div>
-      <h1>{quiz.title}</h1>
-      {quiz.questions.map(({
-        text, questionType, id: questionId, choices,
-      }) => (
-        <Question text={text} questionType={questionType} key={questionId} choices={choices} />
-      ))}
+      {/* <form action="" method="post"> */}
+      <form>
+        <h1>{quiz.title}</h1>
+        {quiz.questions.map(({
+          text, questionType, id: questionId, choices,
+        }) => (
+          <Question
+            text={text}
+            questionType={questionType}
+            key={questionId}
+            choices={choices}
+          />
+        ))}
+        <input type="submit" required />
+      </form>
     </div>
   );
 };
