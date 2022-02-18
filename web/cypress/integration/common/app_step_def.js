@@ -1,17 +1,15 @@
 import {
-  Given, Then,
+  Given, When, Then,
 } from 'cypress-cucumber-preprocessor/steps';
 
 Given('I am on the app', () => {
   cy.visit('/');
 });
 
-Given('I am on the {string}', (page) => {
-  cy.visit(`/${page}`);
-});
-
-Given('I am on the quiz', () => {
-  cy.visit('/quiz');
+When('I click on {string}', (label) => {
+  cy.get('body')
+    .contains(label)
+    .click();
 });
 
 Then('I see {string}', (label) => {
