@@ -27,9 +27,9 @@ namespace backend.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.UserQuizzes)
-                .WithOne(q => q.User);
+            modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Teacher>().ToTable("Teachers");
+            modelBuilder.Entity<Student>().ToTable("Students");
 
             modelBuilder.Entity<QuestionType>().HasData(
                 new QuestionType { Id = 1, Choice = "ShortAnswer" },
