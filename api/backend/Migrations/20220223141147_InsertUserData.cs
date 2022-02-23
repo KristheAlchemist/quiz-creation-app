@@ -8,12 +8,14 @@ namespace backend.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.InsertData("Users", "Name", "Kris Robinson");
+            migrationBuilder.InsertData("Teachers", "Name", "Mr. Robinson");
+            migrationBuilder.InsertData("Students", "Name", "Kris Robinson");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData("Users", "Name", "Kris Robinson");
+            migrationBuilder.DeleteData("Teachers", "Name", "Mr. Robinson");
+            migrationBuilder.DeleteData("Students", "Name", "Kris Robinson");
         }
     }
 }
