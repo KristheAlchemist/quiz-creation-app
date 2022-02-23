@@ -1,6 +1,4 @@
 using backend.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +21,7 @@ namespace backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(o => o.Filters.Add(new AuthorizeFilter()));
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "quiz-creation-app", Version = "v1" });
@@ -34,9 +32,6 @@ namespace backend
                 b.UseLazyLoadingProxies();
                 b.UseSqlServer(Configuration.GetConnectionString("SqlDbConnection"));
             }, ServiceLifetime.Transient);
-
-            services.AddAuthentication()
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,8 +52,6 @@ namespace backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthentication();
 
             app.UseAuthorization();
 
