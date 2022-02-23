@@ -21,7 +21,7 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
@@ -70,10 +70,8 @@ namespace backend.Controllers
                 var quiz = await _db.Quizzes
                     .Include(q => q.QuizQuestions)
                     .ThenInclude(qq => qq.Question)
-                    .ThenInclude(qu => qu.Choices)
                     .Include(q => q.QuizQuestions)
                     .ThenInclude(qq => qq.Question)
-                    .ThenInclude(qu => qu.QuestionType)
                     .FirstOrDefaultAsync(q => q.Id == id);
 
                 if (quiz == null)
@@ -89,16 +87,7 @@ namespace backend.Controllers
                         new QuestionResponse
                         {
                             Id = qq.Question.Id,
-                            Text = qq.Question.Text,
-                            QuestionType = qq.Question.QuestionType,
-                            Choices = qq.Question.Choices.Select(c =>
-                                new ChoiceResponse
-                                {
-                                    Id = c.Id,
-                                    Text = c.Text,
-                                }
-
-                            )
+                            Text = qq.Question.Text
                         }
                     )
                 };
