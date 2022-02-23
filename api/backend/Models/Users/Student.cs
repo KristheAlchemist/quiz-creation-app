@@ -2,8 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace backend.Models
 {
-    public class Student : User
+    public class Student
     {
-        public int TeacherId { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        // public virtual Teacher? Teacher { get; set; }
+        public virtual ICollection<StudentQuiz> StudentQuizzes { get; set; }
     }
 }

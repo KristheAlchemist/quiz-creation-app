@@ -5,42 +5,41 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
-    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class TeachersController : ControllerBase
     {
         private readonly QuizCreationDbContext _db;
-        private readonly ILogger<UsersController> _logger;
+        private readonly ILogger<TeachersController> _logger;
 
-        public UsersController(QuizCreationDbContext db, ILogger<UsersController> logger)
+        public TeachersController(QuizCreationDbContext db, ILogger<TeachersController> logger)
         {
             _db = db;
             _logger = logger;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var users = await _db.Users
+                var teachers = await _db.Teachers
                     .ToListAsync();
 
-                if (users == null)
+                if (teachers == null)
                 {
                     return new NotFoundResult();
                 }
 
-                var usersResponse = users.Select(user =>
-                    new UserResponse
+                var teacherResponse = teachers.Select(teacher =>
+                    new TeacherResponse
                     {
-                        Id = user.Id,
-                        Name = user.Name,
+                        Id = teacher.Id,
+                        Name = teacher.Name,
                     }
                 );
 
-                return new OkObjectResult(usersResponse);
+                return new OkObjectResult(teacherResponse);
             }
             catch (Exception e)
             {
@@ -50,15 +49,14 @@ namespace backend.Controllers
         }
     }
 
-    [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class TeacherController : ControllerBase
     {
         private readonly QuizCreationDbContext _db;
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<StudentController> _logger;
 
-        public UserController(QuizCreationDbContext db, ILogger<UserController> logger)
+        public TeacherController(QuizCreationDbContext db, ILogger<StudentController> logger)
         {
             _db = db;
             _logger = logger;
@@ -69,23 +67,22 @@ namespace backend.Controllers
         {
             try
             {
-                var user = await _db.Users
-                    .Include(u => u.UserQuizzes)
-                    .ThenInclude(us => us.Quiz)
-                    .FirstOrDefaultAsync(u => u.Id == id);
+                var teacher = await _db.Teachers
+                    .Include(t => t.Quizzes)
+                    .FirstOrDefaultAsync(t => t.Id == id);
 
-                if (user == null)
+                if (teacher == null)
                 {
                     return new NotFoundResult();
                 }
 
-                var userResponse = new UserResponse
+                var teacherResponse = new TeacherResponse
                 {
-                    Id = user.Id,
-                    Name = user.Name,
+                    Id = teacher.Id,
+                    Name = teacher.Name,
                 };
 
-                return new OkObjectResult(userResponse);
+                return new OkObjectResult(teacherResponse);
             }
 
 
