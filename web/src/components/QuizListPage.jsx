@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const QuizList = () => {
   const [error, setError] = useState(null);
@@ -33,7 +34,7 @@ const QuizList = () => {
   return (
     <ul>
       {quizzes.map(({ id, title }) => (
-        <Link to={`/quiz/${id}`}><li key={id}>{title}</li></Link>
+        <Link to={`/quiz/${id}`}><li key={id}><Button>{title}</Button></li></Link>
       ))}
 
     </ul>
