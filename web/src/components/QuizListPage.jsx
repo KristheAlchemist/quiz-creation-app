@@ -1,7 +1,7 @@
+import { Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
+import QuizDataGrid from './QuizDataGrid';
 
 const QuizList = () => {
   const [error, setError] = useState(null);
@@ -32,12 +32,12 @@ const QuizList = () => {
   }
 
   return (
-    <ul>
-      {quizzes.map(({ id, title }) => (
-        <Link to={`/quiz/${id}`}><li key={id}><Button>{title}</Button></li></Link>
-      ))}
-
-    </ul>
+    <>
+      <Typography variant="h4" sx={{ marginBottom: 2 }}>Quizzes</Typography>
+      <QuizDataGrid
+        quizzes={quizzes}
+      />
+    </>
   );
 };
 

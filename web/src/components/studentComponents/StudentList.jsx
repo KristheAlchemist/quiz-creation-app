@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
+import AddStudent from './AddStudent';
+import StudentDataGrid from './StudentDataGrid';
 
 const StudentList = () => {
   const [error, setError] = useState(null);
@@ -33,16 +36,15 @@ const StudentList = () => {
 
   return (
     <>
-      <Link to="/teachers">
+      <Typography variant="h4" sx={{ marginBottom: 2 }}>Students</Typography>
+      <Link to={AddStudent}>
         <Button>
           Add Student
         </Button>
       </Link>
-      <ul>
-        {students.map(({ id, name }) => (
-          <Link to={`/student/${id}`}><li key={id}><Button>{name}</Button></li></Link>
-        ))}
-      </ul>
+      <StudentDataGrid
+        students={students}
+      />
     </>
   );
 };

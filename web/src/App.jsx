@@ -1,10 +1,10 @@
 import './App.css';
 import React from 'react';
 import { Route, Routes } from 'react-router';
-import TeacherProfile from './components/TeacherProfile';
-import TeacherList from './components/TeacherList';
-import StudentProfile from './components/StudentProfile';
-import StudentList from './components/StudentList';
+import TeacherProfile from './components/teacherComponents/TeacherProfile';
+import TeacherList from './components/teacherComponents/TeacherList';
+import StudentProfile from './components/studentComponents/StudentProfile';
+import StudentList from './components/studentComponents/StudentList';
 import QuizPage from './components/QuizPage';
 import QuizListPage from './components/QuizListPage';
 
