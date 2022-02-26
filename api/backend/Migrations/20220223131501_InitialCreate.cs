@@ -101,27 +101,6 @@ namespace backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "StudentAnswer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    QuestionId = table.Column<int>(type: "int", nullable: false),
-                    StudentQuizId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudentAnswer", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_StudentAnswer_StudentQuizzes_StudentQuizId",
-                        column: x => x.StudentQuizId,
-                        principalTable: "StudentQuizzes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_QuizQuestions_QuestionId",
                 table: "QuizQuestions",
@@ -131,11 +110,6 @@ namespace backend.Migrations
                 name: "IX_QuizQuestions_QuizId",
                 table: "QuizQuestions",
                 column: "QuizId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentAnswer_StudentQuizId",
-                table: "StudentAnswer",
-                column: "StudentQuizId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentQuizzes_QuizId",
@@ -152,9 +126,6 @@ namespace backend.Migrations
         {
             migrationBuilder.DropTable(
                 name: "QuizQuestions");
-
-            migrationBuilder.DropTable(
-                name: "StudentAnswer");
 
             migrationBuilder.DropTable(
                 name: "Questions");

@@ -87,7 +87,8 @@ namespace backend.Controllers
                         new QuestionResponse
                         {
                             Id = qq.Question.Id,
-                            Text = qq.Question.Text
+                            Text = qq.Question.Text,
+                            QuestionType = qq.Question.QuestionType
                         }
                     )
                 };

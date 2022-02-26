@@ -100,30 +100,6 @@ namespace backend.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("backend.Models.StudentAnswer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Answer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentQuizId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentQuizId");
-
-                    b.ToTable("StudentAnswer");
-                });
-
             modelBuilder.Entity("backend.Models.StudentQuiz", b =>
                 {
                     b.Property<int>("Id")
@@ -166,15 +142,6 @@ namespace backend.Migrations
                     b.Navigation("Quiz");
                 });
 
-            modelBuilder.Entity("backend.Models.StudentAnswer", b =>
-                {
-                    b.HasOne("backend.Models.StudentQuiz", null)
-                        .WithMany("UserAnswers")
-                        .HasForeignKey("StudentQuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("backend.Models.StudentQuiz", b =>
                 {
                     b.HasOne("backend.Models.Quiz", "Quiz")
@@ -204,11 +171,6 @@ namespace backend.Migrations
             modelBuilder.Entity("backend.Models.Student", b =>
                 {
                     b.Navigation("StudentQuizzes");
-                });
-
-            modelBuilder.Entity("backend.Models.StudentQuiz", b =>
-                {
-                    b.Navigation("UserAnswers");
                 });
 #pragma warning restore 612, 618
         }
