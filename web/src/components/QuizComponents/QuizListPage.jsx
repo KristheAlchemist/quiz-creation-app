@@ -24,7 +24,7 @@ const QuizList = () => {
   }, []);
 
   if (error) {
-    return <div>Oops! Could not fetch the quiz page.</div>;
+    return <div>Oops! Could not fetch the quiz list page.</div>;
   }
 
   if (loading || !quizzes) {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DataGrid } from '@mui/x-data-grid';
 import {
+  Card,
   Link, Paper,
 } from '@mui/material';
 
@@ -14,7 +15,9 @@ const QuizDataGrid = ({ quizzes }) => {
       renderCell: ({ row: { id, title } }) => (
         <>
           <Link href={`/quiz/${id}`}>
-            {title}
+            <Card sx={{ minWidth: 121 }}>
+              {title}
+            </Card>
           </Link>
         </>
       ),

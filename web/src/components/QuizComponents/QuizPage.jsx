@@ -38,13 +38,12 @@ const QuizPage = () => {
       <form>
         <h1>{quiz.title}</h1>
         {quiz.questions.map(({
-          text, questionType, id: questionId, choices,
+          text, questionType, id: questionId,
         }) => (
           <Question
             text={text}
             questionType={questionType}
             key={questionId}
-            choices={choices}
           />
         ))}
         <input type="submit" required />
