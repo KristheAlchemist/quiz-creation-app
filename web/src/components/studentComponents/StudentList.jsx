@@ -27,7 +27,7 @@ const StudentList = () => {
   }, []);
 
   if (error) {
-    return <div>Oops! Could not fetch practice member list.</div>;
+    return <div>Oops! Could not fetch the student list.</div>;
   }
 
   if (loading || !students) {
