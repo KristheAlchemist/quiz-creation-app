@@ -53,15 +53,10 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Quizzes");
                 });
@@ -152,33 +147,6 @@ namespace backend.Migrations
                     b.ToTable("StudentQuizzes");
                 });
 
-            modelBuilder.Entity("backend.Models.Teacher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Teachers");
-                });
-
-            modelBuilder.Entity("backend.Models.Quiz", b =>
-                {
-                    b.HasOne("backend.Models.Teacher", "Teacher")
-                        .WithMany("Quizzes")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Teacher");
-                });
-
             modelBuilder.Entity("backend.Models.QuizQuestion", b =>
                 {
                     b.HasOne("backend.Models.Question", "Question")
@@ -241,11 +209,6 @@ namespace backend.Migrations
             modelBuilder.Entity("backend.Models.StudentQuiz", b =>
                 {
                     b.Navigation("UserAnswers");
-                });
-
-            modelBuilder.Entity("backend.Models.Teacher", b =>
-                {
-                    b.Navigation("Quizzes");
                 });
 #pragma warning restore 612, 618
         }

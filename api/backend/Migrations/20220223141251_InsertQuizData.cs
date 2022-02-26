@@ -8,16 +8,16 @@ namespace backend.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.InsertData("Quizzes", new string[] { "Title", "TeacherId" }, new object[] { "Quiz 1", "1" });
-            migrationBuilder.InsertData("Quizzes", new string[] { "Title", "TeacherId" }, new object[] { "Quiz 2", "1" });
-            migrationBuilder.InsertData("Quizzes", new string[] { "Title", "TeacherId" }, new object[] { "Quiz 3", "1" });
+            migrationBuilder.InsertData("Quizzes", "Title", "Quiz 1");
+            migrationBuilder.InsertData("Quizzes", "Title", "Quiz 2");
+            migrationBuilder.InsertData("Quizzes", "Title", "Quiz 3");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData("Quizzes", new string[] { "Title", "TeacherId" }, new object[] { "Quiz 1", "1" });
-            migrationBuilder.DeleteData("Quizzes", new string[] { "Title", "TeacherId" }, new object[] { "Quiz 2", "1" });
-            migrationBuilder.DeleteData("Quizzes", new string[] { "Title", "TeacherId" }, new object[] { "Quiz 3", "1" });
+            migrationBuilder.DeleteData("Quizzes", "Title", "Quiz 1");
+            migrationBuilder.DeleteData("Quizzes", "Title", "Quiz 2");
+            migrationBuilder.DeleteData("Quizzes", "Title", "Quiz 3");
         }
     }
 }

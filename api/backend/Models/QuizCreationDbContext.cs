@@ -12,8 +12,6 @@ namespace backend.Models
         {
         }
 
-        public virtual DbSet<Teacher> Teachers { get; set; }
-
         public virtual DbSet<Student> Students { get; set; }
 
         public virtual DbSet<StudentQuiz> StudentQuizzes { get; set; }
@@ -28,11 +26,6 @@ namespace backend.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.Entity<QuestionType>().HasData(
-            //     new QuestionType { Id = 1, Choice = "ShortAnswer" },
-            //     new QuestionType { Id = 2, Choice = "TrueFalse" },
-            //     new QuestionType { Id = 3, Choice = "MultipleChoice" }
-            // );
         }
     }
 }

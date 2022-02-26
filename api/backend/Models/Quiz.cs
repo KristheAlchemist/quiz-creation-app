@@ -4,9 +4,7 @@ namespace backend.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public int TeacherId { get; set; }
 
-        public virtual Teacher Teacher { get; set; }
         public virtual ICollection<StudentQuiz> StudentQuizzes { get; set; }
         public virtual ICollection<QuizQuestion> QuizQuestions { get; set; }
     }
