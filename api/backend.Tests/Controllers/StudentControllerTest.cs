@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,14 +43,41 @@ namespace backend.Tests.Controllers
                 var result = (response as OkObjectResult).Value as StudentResponse;
                 result.Name.Should().Be(TestUtils.STUDENT_NAME);
             }
+
+            [Fact]
+            public async void WhenNoStudentExists_ReturnsNotFound()
+            {
+                var testId = 999999;
+                var response = await testObject.GetById(testId);
+                response.Should().BeOfType<NotFoundResult>();
+            }
         }
 
-        [Fact]
-        public async void WhenNoStudentExists_ReturnsNotFound()
+
+        public class Post : StudentControllerTest
         {
-            var testId = 999999;
-            var response = await testObject.GetById(testId);
-            response.Should().BeOfType<NotFoundResult>();
+            [Fact]
+            public async void WhenNewStudentAdded_ReturnsOkObject()
+            {
+                var newStudent = new StudentRequest
+                {
+                    Name = "Kris Robinson",
+                };
+                var response = await testObject.Post(newStudent);
+                var result = (response as CreatedResult).Value as StudentResponse;
+                result.Id.Should().BeGreaterThan(0);
+                result.Name.Should().Be(newStudent.Name);
+            }
+
+            [Fact]
+            public async void WhenRequestObjectIsInvalid_ReturnsBadRequest()
+            {
+                var newStudent = new StudentRequest();
+                var response = await testObject.Post(newStudent);
+                response.Should().BeOfType<BadRequestObjectResult>();
+                var validationResults = ((response as BadRequestObjectResult).Value as IEnumerable<ValidationResult>);
+                validationResults.Should().Contain(vr => vr.MemberNames.Contains("Name") && vr.ErrorMessage.Contains("required"));
+            }
         }
     }
 }
