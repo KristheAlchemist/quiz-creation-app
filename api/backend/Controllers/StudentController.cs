@@ -30,11 +30,11 @@ namespace backend.Controllers
                     return new NotFoundResult();
                 }
 
-                var studentResponse = students.Select(user =>
+                var studentResponse = students.Select(student =>
                     new StudentResponse
                     {
-                        Id = user.Id,
-                        Name = user.Name,
+                        Id = student.Id,
+                        Name = student.Name,
                     }
                 );
 
