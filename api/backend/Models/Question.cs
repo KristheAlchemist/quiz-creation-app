@@ -7,6 +7,6 @@ namespace backend.Models
         public string CorrectAnswer { get; set; }
         public QuestionType QuestionType { get; set; }
 
-        // public virtual ICollection<Choice> Choices { get; set; }
+        public virtual ICollection<Choice> Choices { get; set; }
     }
 }

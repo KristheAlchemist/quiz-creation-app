@@ -22,7 +22,7 @@ namespace backend.Models
 
         public virtual DbSet<Question> Questions { get; set; }
 
-        // public virtual DbSet<Choice> Choices { get; set; }
+        public virtual DbSet<Choice> Choices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.Models;
 
@@ -10,9 +11,10 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(QuizCreationDbContext))]
-    partial class QuizCreationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220226193004_InsertChoiceData")]
+    partial class InsertChoiceData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,11 +146,13 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Choice", b =>
                 {
-                    b.HasOne("backend.Models.Question", null)
+                    b.HasOne("backend.Models.Question", "Question")
                         .WithMany("Choices")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("backend.Models.QuizQuestion", b =>
