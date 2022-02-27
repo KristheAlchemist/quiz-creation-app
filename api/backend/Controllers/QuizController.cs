@@ -1,12 +1,9 @@
 using backend.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
-    [AllowAnonymous]
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class QuizzesController : ControllerBase
@@ -46,8 +43,6 @@ namespace backend.Controllers
         }
     }
 
-    [AllowAnonymous]
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class QuizController : ControllerBase
