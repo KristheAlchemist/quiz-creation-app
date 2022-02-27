@@ -8,7 +8,7 @@ const studentProfileDetails = {
   name: 'Kris Robinson',
 };
 
-test('renders practice member name', async () => {
+test('renders student name', async () => {
   const mockApi = new MockAdapter(axios);
   mockApi.onGet(`${process.env.REACT_APP_BASE_API}/api/Student/1`).reply(200, studentProfileDetails);
   render(<StudentProfile />);

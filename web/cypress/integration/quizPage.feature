@@ -4,6 +4,7 @@ Feature: Quiz Page
 
   Scenario: I can see the list of tests
     Then I see 'Loading...'
+    Then I see 'Quizzes'
     Then I see 'Quiz 1'
     Then I see 'Quiz 2'
     Then I see 'Quiz 3'
