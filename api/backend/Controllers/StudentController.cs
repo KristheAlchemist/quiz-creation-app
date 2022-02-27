@@ -1,4 +1,5 @@
 using backend.Models;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -92,6 +93,30 @@ namespace backend.Controllers
                 _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
                 throw;
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] StudentRequest studentRequest)
+        {
+            var validationResults = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(studentRequest, new ValidationContext(studentRequest), validationResults, true))
+            {
+                return new BadRequestObjectResult(validationResults);
+            }
+
+            var studentToAdd = new Student
+            {
+                Name = studentRequest.Name,
+            };
+
+            await _db.Students.AddAsync(studentToAdd);
+            await _db.SaveChangesAsync();
+
+            var addedStudent = await _db.Students
+                .Include(s => s.StudentQuizzes)
+                .SingleAsync(s => s.Id == studentToAdd.Id);
+
+            return new CreatedResult("api/Students" + studentToAdd.Id, new StudentResponse(addedStudent));
         }
     }
 }

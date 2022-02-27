@@ -7,7 +7,6 @@ namespace backend.Models
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
-        public ICollection<StudentQuiz> StudentQuizzes { get; set; }
+        public IEnumerable<StudentQuiz> StudentQuizzes { get; set; }
     }
 }
