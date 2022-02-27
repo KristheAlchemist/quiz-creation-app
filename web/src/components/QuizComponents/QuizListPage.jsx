@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import QuizDataGrid from './QuizDataGrid';
+import QuizListDataGrid from './QuizListDataGrid';
 
 const QuizList = () => {
   const [error, setError] = useState(null);
@@ -34,7 +34,7 @@ const QuizList = () => {
   return (
     <>
       <Typography variant="h4" sx={{ marginBottom: 2 }}>Quizzes</Typography>
-      <QuizDataGrid
+      <QuizListDataGrid
         quizzes={quizzes}
       />
     </>

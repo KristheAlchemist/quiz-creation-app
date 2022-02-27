@@ -6,7 +6,7 @@ import {
   Link, Paper,
 } from '@mui/material';
 
-const QuizDataGrid = ({ quizzes }) => {
+const QuizListDataGrid = ({ quizzes }) => {
   const columns = [
     {
       field: 'title',
@@ -36,11 +36,11 @@ const QuizDataGrid = ({ quizzes }) => {
   );
 };
 
-QuizDataGrid.defaultProps = {
+QuizListDataGrid.defaultProps = {
   quizzes: [],
 };
 
-QuizDataGrid.propTypes = {
+QuizListDataGrid.propTypes = {
   quizzes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -49,4 +49,4 @@ QuizDataGrid.propTypes = {
   ),
 };
 
-export default QuizDataGrid;
+export default QuizListDataGrid;
