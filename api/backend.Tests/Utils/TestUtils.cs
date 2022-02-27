@@ -12,12 +12,12 @@ namespace backend.Tests.Utils
 {
     public static class TestUtils
     {
-        public static readonly string USER_NAME = "Kris Robinson";
+        public static readonly string TEACHER_NAME = "Mr. Robinson";
+        public static readonly string STUDENT_NAME = "Kris Robinson";
         public static readonly string QUIZ_TITLE = "Quiz 1";
         public static readonly string QUESTION_TEXT = "Why did the chicken cross the road?";
-        public static readonly string QUESTION_ANSWER = "To get to the other side.";
-        public static readonly string QUESTION_TYPE = "MultipleChoice";
-        public static readonly string CHOICE_TEXT = "To get to the other side.";
+        public static readonly string QUESTION_TYPE = "ShortAnswer";
+        public static readonly string CORRECT_ANSWER = "To get to the other side.";
 
         public static async Task<QuizCreationDbContext> GetTestDbContext()
         {
@@ -25,14 +25,20 @@ namespace backend.Tests.Utils
             await db.Database.EnsureDeletedAsync();
             await db.Database.EnsureCreatedAsync();
 
-            var user = new User(USER_NAME);
-            db.Users.Add(user);
+            var student = new Student { Name = STUDENT_NAME };
+            db.Students.Add(student);
 
-            var quiz = new Quiz(QUIZ_TITLE);
+            var quiz = new Quiz { Title = QUIZ_TITLE };
             db.Quizzes.Add(quiz);
 
-            var question = new Question(QUESTION_TEXT, QUESTION_ANSWER);
+            var question = new Question { Text = QUESTION_TEXT };
             db.Questions.Add(question);
+
+            var questionType = new Question { Text = QUESTION_TYPE };
+            db.Questions.Add(questionType);
+
+            var correctAnswer = new Question { Text = CORRECT_ANSWER };
+            db.Questions.Add(correctAnswer);
 
             await db.SaveChangesAsync();
 
