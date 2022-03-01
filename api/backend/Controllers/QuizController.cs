@@ -1,4 +1,5 @@
 using backend.Models;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -95,5 +96,45 @@ namespace backend.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] QuizRequest quizRequest)
+        {
+            var validationResults = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(quizRequest, new ValidationContext(quizRequest), validationResults, true))
+            {
+                return new BadRequestObjectResult(validationResults);
+            }
+
+            var quizToAdd = new Quiz
+            {
+                Title = quizRequest.Title,
+                // QuizQuestions = quizRequest.Questions.Select(qr =>
+                //     new Question
+                //     {
+                //         Text = qr.Text,
+                //         QuestionType = qr.QuestionType,
+                //         Choices = qr.Choices.Select(cr =>
+                //             new Choice
+                //             {
+                //                 Text = cr.Text,
+                //                 QuestionId = cr.QuestionId,
+                //             }),
+                //         CorrectAnswer = qr.CorrectAnswer,
+                //     }
+                // ),
+            };
+
+            await _db.Quizzes.AddAsync(quizToAdd);
+            await _db.SaveChangesAsync();
+
+            var addedQuiz = await _db.Quizzes
+            .Include(s => s.QuizQuestions)
+            .ThenInclude(qq => qq.Question)
+            .SingleAsync(s => s.Id == quizToAdd.Id);
+
+            return new CreatedResult("api/Quizzes" + quizToAdd.Id, new QuizResponse(addedQuiz));
+        }
+
     }
 }

@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
@@ -33,7 +34,15 @@ const StudentProfile = () => {
 
   return (
     <div>
-      <h2>{student.name}</h2>
+      <Typography variant="h4">
+        <br />
+        {student.name}
+        <br />
+        <br />
+        Email:
+        {' '}
+        {student.email}
+      </Typography>
     </div>
   );
 };

@@ -1,16 +1,18 @@
 import React from 'react';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 const TrueFalse = () => (
-  <div>
-    <form action="" method="post">
-      <div>
-        <input type="radio" id="tru" name="chicken" value="t" />
-        <label htmlFor="tru">True</label>
-        <input type="radio" id="fals" name="chicken" value="" />
-        <label htmlFor="fals">False</label>
-      </div>
-    </form>
-  </div>
+  <FormControl>
+    <FormLabel>Please select one:</FormLabel>
+    <RadioGroup row>
+      <FormControlLabel value="true" control={<Radio />} label="True" />
+      <FormControlLabel value="false" control={<Radio />} label="False" />
+    </RadioGroup>
+  </FormControl>
 );
 
 export default TrueFalse;

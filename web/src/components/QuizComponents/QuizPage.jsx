@@ -1,7 +1,12 @@
+import {
+  Button,
+  FormGroup, Paper, Typography,
+} from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import Question from './Question';
+// import { Controller } from 'react-hook-form';
+import Question from './QuestionComponents/Question';
 
 const QuizPage = () => {
   const [error, setError] = useState(null);
@@ -33,22 +38,34 @@ const QuizPage = () => {
   }
 
   return (
-    <div>
-      {/* <form action="" method="post"> */}
-      <form>
-        <h1>{quiz.title}</h1>
-        {quiz.questions.map(({
-          text, questionType, id: questionId,
-        }) => (
-          <Question
-            text={text}
-            questionType={questionType}
-            key={questionId}
-          />
-        ))}
-        <input type="submit" required />
-      </form>
-    </div>
+    <FormGroup>
+      <Typography variant="h4">{quiz.title}</Typography>
+      <Paper sx={{ p: 2, minHeight: 825 }}>
+        <FormGroup>
+          {quiz.questions.map(({
+            text, questionType, id: questionId,
+          }) => (
+            <Question
+              text={text}
+              questionType={questionType}
+              key={questionId}
+            />
+          ))}
+        </FormGroup>
+        <Button variant="contained" color="inherit">
+          Submit
+        </Button>
+      </Paper>
+      {/*
+      <Controller
+        name="fullName"
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <Question text={text} label="Full Name" value={value} onChange={onChange} />
+        )}
+      /> */}
+
+    </FormGroup>
   );
 };
 

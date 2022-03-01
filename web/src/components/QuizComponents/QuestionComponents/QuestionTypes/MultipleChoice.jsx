@@ -1,3 +1,6 @@
+import {
+  FormControl, FormControlLabel, FormLabel, Radio, RadioGroup,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 const MultipleChoice = () => {
@@ -25,18 +28,14 @@ const MultipleChoice = () => {
     return <h1>Loading...</h1>;
   }
   return (
-    <div>
-      <form action="" method="post">
-        <p>Please select one:</p>
-        <input type="radio" id="a" name="chicken" value="a" />
-        <label htmlFor="a">To not get eaten</label>
-        <input type="radio" id="b" name="chicken" value="b" />
-        <label htmlFor="b">To get to the other side</label>
-        <input type="radio" id="c" name="chicken" value="c" />
-        <label htmlFor="c">To avoid lame and outdated jokes</label>
-        <input type="submit" />
-      </form>
-    </div>
+    <FormControl>
+      <FormLabel>Please select one:</FormLabel>
+      <RadioGroup row>
+        <FormControlLabel value="a" control={<Radio />} label="To not get eaten" />
+        <FormControlLabel value="b" control={<Radio />} label="To get to the other side" />
+        <FormControlLabel value="c" control={<Radio />} label="To avoid lame and outdated jokes" />
+      </RadioGroup>
+    </FormControl>
   );
 };
 export default MultipleChoice;

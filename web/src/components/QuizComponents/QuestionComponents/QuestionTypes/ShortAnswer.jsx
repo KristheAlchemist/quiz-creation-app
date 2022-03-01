@@ -1,13 +1,13 @@
+import {
+  FormControl, FormLabel, TextField,
+} from '@mui/material';
 import React from 'react';
 
 const ShortAnswer = () => (
-  <div>
-    <label>
-      Please answer here:
-      <br />
-      <input type="text" />
-    </label>
-  </div>
+  <FormControl>
+    <FormLabel>Please answer here:</FormLabel>
+    <TextField />
+  </FormControl>
 );
 
 export default ShortAnswer;

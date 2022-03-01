@@ -81,6 +81,7 @@ namespace backend.Controllers
                 {
                     Id = student.Id,
                     Name = student.Name,
+                    Email = student.Email,
                 };
 
                 return new OkObjectResult(studentResponse);
@@ -107,6 +108,7 @@ namespace backend.Controllers
             var studentToAdd = new Student
             {
                 Name = studentRequest.Name,
+                Email = studentRequest.Email,
             };
 
             await _db.Students.AddAsync(studentToAdd);

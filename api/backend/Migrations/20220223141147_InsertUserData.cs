@@ -8,7 +8,8 @@ namespace backend.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.InsertData("Students", "Name", "Kris Robinson");
+            // migrationBuilder.InsertData("Students", "Name", "Kris Robinson");
+            migrationBuilder.InsertData("Students", new string[] { "Name", "Email" }, new object[] { "Kris Robinson", "kris@wwt.com" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

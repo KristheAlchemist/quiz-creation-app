@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
-import AddStudent from './AddStudent';
 import StudentDataGrid from './StudentDataGrid';
+import AddStudentModal from './AddStudentModal';
 
 const StudentList = () => {
   const [error, setError] = useState(null);
@@ -34,14 +32,15 @@ const StudentList = () => {
     return <h1>Loading...</h1>;
   }
 
+  const onSubmit = async (student) => {
+    const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Students`, student);
+    setStudents([...students, data]);
+  };
+
   return (
     <>
       <Typography variant="h4" sx={{ marginBottom: 2 }}>Students</Typography>
-      <Link to={AddStudent}>
-        <Button>
-          Add Student
-        </Button>
-      </Link>
+      <AddStudentModal onSubmit={onSubmit} />
       <StudentDataGrid
         students={students}
       />

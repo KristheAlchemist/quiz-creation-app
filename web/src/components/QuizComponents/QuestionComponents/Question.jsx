@@ -9,16 +9,32 @@ const Question = ({ text, questionType }) => {
   if (questionType === 2) {
     return (
       <div>
-        <h1>{text}</h1>
-        <MultipleChoice />
+        <Paper
+          elevation={7}
+          sx={{
+            width: 900,
+            height: 200,
+          }}
+        >
+          <h1>{text}</h1>
+          <MultipleChoice />
+        </Paper>
       </div>
     );
   }
   if (questionType === 1) {
     return (
       <div>
-        <h1>{text}</h1>
-        <TrueFalse />
+        <Paper
+          elevation={7}
+          sx={{
+            width: 900,
+            height: 200,
+          }}
+        >
+          <h1>{text}</h1>
+          <TrueFalse />
+        </Paper>
       </div>
     );
   }
@@ -28,11 +44,10 @@ const Question = ({ text, questionType }) => {
         elevation={7}
         sx={{
           width: 900,
-          height: 300,
+          height: 200,
         }}
       >
         <h1>{text}</h1>
-        <h1>{questionType}</h1>
         <ShortAnswer />
       </Paper>
     </div>

@@ -42,6 +42,7 @@ namespace backend.Tests.Controllers
                 response.Should().BeOfType<OkObjectResult>();
                 var result = (response as OkObjectResult).Value as StudentResponse;
                 result.Name.Should().Be(TestUtils.STUDENT_NAME);
+                result.Email.Should().Be(TestUtils.STUDENT_EMAIL);
             }
 
             [Fact]
@@ -53,7 +54,6 @@ namespace backend.Tests.Controllers
             }
         }
 
-
         public class Post : StudentControllerTest
         {
             [Fact]
@@ -62,11 +62,13 @@ namespace backend.Tests.Controllers
                 var newStudent = new StudentRequest
                 {
                     Name = "Kris Robinson",
+                    Name = "Kris Robinson",
                 };
                 var response = await testObject.Post(newStudent);
                 var result = (response as CreatedResult).Value as StudentResponse;
-                result.Id.Should().BeGreaterThan(0);
+                result.Id.Should().BeGreaterThan(1);
                 result.Name.Should().Be(newStudent.Name);
+                result.Email.Should().Be(newStudent.Email);
             }
 
             [Fact]

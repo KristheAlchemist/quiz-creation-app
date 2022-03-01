@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DataGrid } from '@mui/x-data-grid';
 import {
   Card,
-  Link, Paper,
+  Link, Paper, Typography,
 } from '@mui/material';
 
 const QuizListDataGrid = ({ quizzes }) => {
@@ -16,7 +16,9 @@ const QuizListDataGrid = ({ quizzes }) => {
         <>
           <Link href={`/quiz/${id}`}>
             <Card sx={{ minWidth: 121 }}>
-              {title}
+              <Typography variant="h5">
+                {title}
+              </Typography>
             </Card>
           </Link>
         </>

@@ -6,6 +6,7 @@ namespace backend.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
         public virtual IEnumerable<StudentQuizResponse> StudentQuizzes { get; set; }
 
         public StudentResponse() { }
@@ -13,6 +14,7 @@ namespace backend.Models
         {
             Id = student.Id;
             Name = student.Name;
+            Email = student.Email;
         }
     }
 

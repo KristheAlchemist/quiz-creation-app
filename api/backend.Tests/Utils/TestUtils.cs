@@ -14,6 +14,7 @@ namespace backend.Tests.Utils
     {
         public static readonly string TEACHER_NAME = "Mr. Robinson";
         public static readonly string STUDENT_NAME = "Kris Robinson";
+        public static readonly string STUDENT_EMAIL = "kris@wwt.com";
         public static readonly string QUIZ_TITLE = "Quiz 1";
         public static readonly string QUESTION_TEXT = "Why did the chicken cross the road?";
         public static readonly string QUESTION_TYPE = "ShortAnswer";
