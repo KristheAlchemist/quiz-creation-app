@@ -33,7 +33,7 @@ const StudentList = () => {
   }
 
   const onSubmit = async (student) => {
-    const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Students`, student);
+    const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Student`, student);
     setStudents([...students, data]);
   };
 
