@@ -26,7 +26,7 @@ namespace backend.Tests.Utils
             await db.Database.EnsureDeletedAsync();
             await db.Database.EnsureCreatedAsync();
 
-            var student = new Student { Name = STUDENT_NAME };
+            var student = new Student { Name = STUDENT_NAME, Email = STUDENT_EMAIL };
             db.Students.Add(student);
 
             var quiz = new Quiz { Title = QUIZ_TITLE };

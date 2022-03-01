@@ -61,8 +61,8 @@ namespace backend.Tests.Controllers
             {
                 var newStudent = new StudentRequest
                 {
-                    Name = "Kris Robinson",
-                    Name = "Kris Robinson",
+                    Name = "Mike Robinson",
+                    Email = "mr@wwt.com",
                 };
                 var response = await testObject.Post(newStudent);
                 var result = (response as CreatedResult).Value as StudentResponse;
