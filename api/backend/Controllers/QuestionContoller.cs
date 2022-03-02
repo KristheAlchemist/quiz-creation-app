@@ -86,7 +86,6 @@ namespace backend.Controllers
                         {
                             Id = c.Id,
                             Text = c.Text,
-                            QuestionId = c.QuestionId
                         }),
                 };
 
@@ -100,6 +99,40 @@ namespace backend.Controllers
                 _logger.LogCritical($"SQL Read error. It is likely that there is no database connection established. ${e.Message}");
                 throw;
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] QuestionRequest questionRequest)
+        {
+            var validationResults = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(questionRequest, new ValidationContext(questionRequest), validationResults, true))
+            {
+                return new BadRequestObjectResult(validationResults);
+            }
+
+            var questionToAdd = new Question
+            {
+                Text = questionRequest.Text,
+                QuestionType = questionRequest.QuestionType,
+                // Choices = questionRequest.Choices.Select(cr =>
+                //             new Choice
+                //                 {
+                //                     Text = cr.Text,
+                //                     QuestionId = cr.QuestionId,
+                //                 }
+                //             ),
+                CorrectAnswer = questionRequest.CorrectAnswer,
+
+            };
+
+            await _db.Questions.AddAsync(questionToAdd);
+            await _db.SaveChangesAsync();
+
+            var addedQuestion = await _db.Questions
+                .Include(q => q.Choices)
+                .SingleAsync(q => q.Id == questionToAdd.Id);
+
+            return new CreatedResult("api/Questions" + questionToAdd.Id, new QuestionResponse(addedQuestion));
         }
     }
 }
