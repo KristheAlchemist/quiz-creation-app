@@ -13,28 +13,24 @@ const QuizListDataGrid = ({ quizzes }) => {
       headerName: 'Title',
       width: 1800,
       renderCell: ({ row: { id, title } }) => (
-        <>
-          <Link href={`/quiz/${id}`}>
-            <Card sx={{ minWidth: 121 }}>
-              <Typography variant="h5">
-                {title}
-              </Typography>
-            </Card>
-          </Link>
-        </>
+        <Link href={`/quiz/${id}`}>
+          <Card sx={{ minWidth: 121 }}>
+            <Typography variant="h5">
+              {title}
+            </Typography>
+          </Card>
+        </Link>
       ),
     },
   ];
 
   return (
-    <>
-      <Paper sx={{ height: 900 }}>
-        <DataGrid
-          rows={quizzes}
-          columns={columns}
-        />
-      </Paper>
-    </>
+    <Paper sx={{ height: 900 }}>
+      <DataGrid
+        rows={quizzes}
+        columns={columns}
+      />
+    </Paper>
   );
 };
 

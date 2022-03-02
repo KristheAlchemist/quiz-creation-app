@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import AddQuizModal from './AddQuizModal';
 import QuizListDataGrid from './QuizListDataGrid';
 
 const QuizList = () => {
@@ -31,9 +32,15 @@ const QuizList = () => {
     return <h1>Loading...</h1>;
   }
 
+  const onSubmit = async (quiz) => {
+    const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Quiz`, quiz);
+    setQuizzes([...quizzes, data]);
+  };
+
   return (
     <>
       <Typography variant="h4" sx={{ marginBottom: 2 }}>Quizzes</Typography>
+      <AddQuizModal onSubmit={onSubmit} />
       <QuizListDataGrid
         quizzes={quizzes}
       />
