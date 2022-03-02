@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { DataGrid } from '@mui/x-data-grid';
 import {
   Avatar,
+  Button,
   Link, Paper, Typography,
 } from '@mui/material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-const StudentDataGrid = ({ students }) => {
+const StudentListDataGrid = ({ students }) => {
   const columns = [
     {
       field: 'name',
@@ -20,23 +22,28 @@ const StudentDataGrid = ({ students }) => {
               {name}
             </Typography>
           </Link>
+          <Typography>
+            <Button>
+              <DeleteForeverIcon />
+            </Button>
+          </Typography>
         </>
       ),
     },
-    {
-      field: 'email',
-      headerName: 'Email',
-      width: window.innerWidth,
-      renderCell: ({ row: { id, email } }) => (
-        <>
-          <Link href={`/student/${id}`}>
-            <Typography variant="h5">
-              {email}
-            </Typography>
-          </Link>
-        </>
-      ),
-    },
+    // {
+    //   field: 'email',
+    //   headerName: 'Email',
+    //   width: window.innerWidth,
+    //   renderCell: ({ row: { id, email } }) => (
+    //     <>
+    //       <Link href={`/student/${id}`}>
+    //         <Typography variant="h5">
+    //           {email}
+    //         </Typography>
+    //       </Link>
+    //     </>
+    //   ),
+    // },
   ];
 
   return (
@@ -51,11 +58,11 @@ const StudentDataGrid = ({ students }) => {
   );
 };
 
-StudentDataGrid.defaultProps = {
+StudentListDataGrid.defaultProps = {
   students: [],
 };
 
-StudentDataGrid.propTypes = {
+StudentListDataGrid.propTypes = {
   students: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -65,4 +72,4 @@ StudentDataGrid.propTypes = {
   ),
 };
 
-export default StudentDataGrid;
+export default StudentListDataGrid;

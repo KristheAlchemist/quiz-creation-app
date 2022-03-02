@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
-import StudentDataGrid from './StudentDataGrid';
+import StudentListDataGrid from './StudentListDataGrid';
 import AddStudentModal from './AddStudentModal';
 
 const StudentList = () => {
@@ -37,11 +37,13 @@ const StudentList = () => {
     setStudents([...students, data]);
   };
 
+  // make onClose method
+
   return (
     <>
       <Typography variant="h4" sx={{ marginBottom: 2 }}>Students</Typography>
       <AddStudentModal onSubmit={onSubmit} />
-      <StudentDataGrid
+      <StudentListDataGrid
         students={students}
       />
     </>
