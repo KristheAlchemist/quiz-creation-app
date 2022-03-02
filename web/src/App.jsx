@@ -5,6 +5,7 @@ import StudentProfile from './components/StudentComponents/StudentProfile';
 import StudentList from './components/StudentComponents/StudentList';
 import QuizPage from './components/QuizComponents/QuizPage';
 import QuizListPage from './components/QuizComponents/QuizListPage';
+import QuestionList from './components/QuizComponents/QuestionComponents/QuestionList';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/student/:id" element={<StudentProfile />} />
         <Route path="/quizzes" element={<QuizListPage />} />
         <Route path="/quiz/:id" element={<QuizPage />} />
+        <Route path="/questions" element={<QuestionList />} />
       </Routes>
     </div>
   );
