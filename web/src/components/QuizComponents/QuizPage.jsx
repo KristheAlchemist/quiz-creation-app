@@ -38,25 +38,31 @@ const QuizPage = () => {
   }
 
   return (
-    <FormGroup>
-      <Typography variant="h4">{quiz.title}</Typography>
-      <Paper sx={{ p: 2, minHeight: 825 }}>
-        <FormGroup>
-          {quiz.questions.map(({
-            text, questionType, id: questionId,
-          }) => (
-            <Question
-              text={text}
-              questionType={questionType}
-              key={questionId}
-            />
-          ))}
-        </FormGroup>
-        <Button variant="contained" color="inherit">
-          Submit
+    <>
+      <Typography align="left">
+        <Button href="/quizzes">
+          Back
         </Button>
-      </Paper>
-      {/*
+      </Typography>
+      <FormGroup>
+        <Typography variant="h4">{quiz.title}</Typography>
+        <Paper sx={{ p: 2, minHeight: 825 }}>
+          <FormGroup>
+            {quiz.questions.map(({
+              text, questionType, id: questionId,
+            }) => (
+              <Question
+                text={text}
+                questionType={questionType}
+                key={questionId}
+              />
+            ))}
+          </FormGroup>
+          <Button variant="contained" color="inherit">
+            Submit
+          </Button>
+        </Paper>
+        {/*
       <Controller
         name="fullName"
         control={control}
@@ -65,7 +71,8 @@ const QuizPage = () => {
         )}
       /> */}
 
-    </FormGroup>
+      </FormGroup>
+    </>
   );
 };
 

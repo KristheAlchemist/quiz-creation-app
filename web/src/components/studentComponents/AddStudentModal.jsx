@@ -19,7 +19,7 @@ import {
   Typography,
 } from '@mui/material';
 
-const AddStudentModal = ({ onSubmit, onClose }) => {
+const AddStudentModal = ({ onSubmit }) => {
   const [open, setOpen] = useState(false);
 
   const validationSchema = yup.object().shape({
@@ -39,6 +39,10 @@ const AddStudentModal = ({ onSubmit, onClose }) => {
     setOpen(false);
   };
 
+  // const onClose = () => {
+  //   handleClickClose();
+  // };
+
   const {
     handleSubmit,
     control,
@@ -52,11 +56,13 @@ const AddStudentModal = ({ onSubmit, onClose }) => {
       </Button>
       <Dialog
         open={open}
-        onClose={onClose}
+        onClose={handleClickClose}
       >
-        <Button onClick={handleClickClose}>
-          Back
-        </Button>
+        <Typography align="left">
+          <Button onClick={handleClickClose}>
+            Back
+          </Button>
+        </Typography>
         <DialogTitle variant="h4">Enroll New Student</DialogTitle>
         <DialogContent>
           {!!errors.server && <Alert severity="error">{errors.server.message}</Alert>}
@@ -126,7 +132,14 @@ const AddStudentModal = ({ onSubmit, onClose }) => {
           </Paper>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>Add Student</Button>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            onClose={handleClickClose}
+            disabled={isSubmitting}
+          >
+            Add Student
+
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
@@ -135,7 +148,6 @@ const AddStudentModal = ({ onSubmit, onClose }) => {
 
 AddStudentModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
 };
 
 export default AddStudentModal;

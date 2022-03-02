@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
@@ -34,6 +34,11 @@ const StudentProfile = () => {
 
   return (
     <div>
+      <Typography align="left">
+        <Button href="/students">
+          Back
+        </Button>
+      </Typography>
       <Typography variant="h4">
         <br />
         {student.name}
