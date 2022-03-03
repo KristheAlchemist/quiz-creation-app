@@ -84,14 +84,14 @@ namespace backend.Controllers
                             Id = qq.Question.Id,
                             Text = qq.Question.Text,
                             QuestionType = qq.Question.QuestionType,
-                            Choices = qq.Question.Choices.Select(c =>
-                               new ChoiceResponse
-                               {
-                                   Id = c.Id,
-                                   Text = c.Text,
-                                   QuestionId = c.QuestionId
-                               }
-                           )
+                            //     Choices = qq.Question.Choices.Select(c =>
+                            //        new ChoiceResponse
+                            //        {
+                            //            Id = c.Id,
+                            //            Text = c.Text,
+                            //            QuestionId = c.QuestionId
+                            //        }
+                            //    )
                         }
                     )
                 };
@@ -116,20 +116,6 @@ namespace backend.Controllers
             var quizToAdd = new Quiz
             {
                 Title = quizRequest.Title,
-                // QuizQuestions = quizRequest.Questions.Select(qr =>
-                //     new Question
-                //     {
-                //         Text = qr.Text,
-                //         QuestionType = qr.QuestionType,
-                //         Choices = qr.Choices.Select(cr =>
-                //             new Choice
-                //             {
-                //                 Text = cr.Text,
-                //                 QuestionId = cr.QuestionId,
-                //             }),
-                //         CorrectAnswer = qr.CorrectAnswer,
-                //     }
-                // ),
             };
 
             await _db.Quizzes.AddAsync(quizToAdd);
@@ -138,7 +124,6 @@ namespace backend.Controllers
             var addedQuiz = await _db.Quizzes
             .Include(s => s.QuizQuestions)
             .ThenInclude(qq => qq.Question)
-            .ThenInclude(q => q.Choices)
             .SingleAsync(s => s.Id == quizToAdd.Id);
 
             return new CreatedResult("api/Quizzes" + quizToAdd.Id, new QuizResponse(addedQuiz));

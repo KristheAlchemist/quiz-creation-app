@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { DataGrid } from '@mui/x-data-grid';
 import {
   Avatar,
-  Button,
+  // Button,
   Link, Paper, Typography,
 } from '@mui/material';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const StudentListDataGrid = ({ students }) => {
   const columns = [
@@ -23,27 +23,14 @@ const StudentListDataGrid = ({ students }) => {
             </Typography>
           </Link>
           <Typography>
-            <Button>
+            {/* <Button>
               <DeleteForeverIcon />
-            </Button>
+            </Button> */}
           </Typography>
         </>
       ),
     },
-    // {
-    //   field: 'email',
-    //   headerName: 'Email',
-    //   width: window.innerWidth,
-    //   renderCell: ({ row: { id, email } }) => (
-    //     <>
-    //       <Link href={`/student/${id}`}>
-    //         <Typography variant="h5">
-    //           {email}
-    //         </Typography>
-    //       </Link>
-    //     </>
-    //   ),
-    // },
+
   ];
 
   return (

@@ -1,5 +1,6 @@
 import {
   Button,
+  Dialog,
   FormGroup, Paper, Typography,
 } from '@mui/material';
 import axios from 'axios';
@@ -11,6 +12,7 @@ import Question from './QuestionComponents/Question';
 const QuizPage = () => {
   const [error, setError] = useState(null);
   const [quiz, setQuiz] = useState(null);
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
@@ -37,41 +39,64 @@ const QuizPage = () => {
     return <h1>Loading...</h1>;
   }
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClickClose = () => {
+    setOpen(false);
+  };
+
+  // const {
+  //   handleSubmit,
+  //   control,
+  //   setValue,
+  //   formState: { errors, isSubmitting },
+  // } = useForm({ resolver: yupResolver(validationSchema) });
+
   return (
     <>
-      <Typography align="left">
-        <Button href="/quizzes">
-          Back
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Start
         </Button>
-      </Typography>
-      <FormGroup>
-        <Typography variant="h4">{quiz.title}</Typography>
-        <Paper sx={{ p: 2, minHeight: 825 }}>
-          <FormGroup>
-            {quiz.questions.map(({
-              text, questionType, id: questionId,
-            }) => (
-              <Question
-                text={text}
-                questionType={questionType}
-                key={questionId}
-              />
-            ))}
-          </FormGroup>
-          <Button variant="contained" color="inherit">
-            Submit
+      </div>
+      <Dialog
+        open={open}
+        onClose={handleClickClose}
+      >
+        <Typography align="left">
+          <Button href="/quizzes">
+            Back
           </Button>
-        </Paper>
-        {/*
-      <Controller
-        name="fullName"
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <Question text={text} label="Full Name" value={value} onChange={onChange} />
-        )}
-      /> */}
-
-      </FormGroup>
+        </Typography>
+        <FormGroup>
+          <Typography variant="h4">{quiz.title}</Typography>
+          <Paper sx={{ p: 2, minHeight: 700 }}>
+            <FormGroup>
+              {quiz.questions.map(({
+                text, questionType, id: questionId,
+              }) => (
+                <FormGroup>
+                  <Question
+                    text={text}
+                    questionType={questionType}
+                    key={questionId}
+                  />
+                </FormGroup>
+              ))}
+            </FormGroup>
+            <Button variant="contained" color="inherit">
+              Submit
+            </Button>
+          </Paper>
+        </FormGroup>
+      </Dialog>
     </>
   );
 };

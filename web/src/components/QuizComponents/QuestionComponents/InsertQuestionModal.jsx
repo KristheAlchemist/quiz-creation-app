@@ -19,39 +19,39 @@ import {
   Typography,
 } from '@mui/material';
 
-const AddStudentModal = ({ onSubmit, onClose, handleOpenAddModal }) => {
+const InsertQuestionModal = ({ onSubmit }) => {
   const [open, setOpen] = useState(false);
 
   const validationSchema = yup.object().shape({
-    name: yup.string()
+    text: yup.string()
       .trim()
-      .required('Please enter the full name'),
-    email: yup.string()
+      .required('Please enter the question text'),
+    // questionType: yup.number()
+    //   .required('Please enter the question type'),
+    correctAnswer: yup.string()
       .trim()
-      .required('Please enter the e-mail address'),
+      .required('Please enter an answer'),
   });
 
   const handleClickOpen = () => {
     setOpen(true);
-    handleOpenAddModal();
   };
 
   const handleClickClose = () => {
-    setOpen(onClose);
+    setOpen(false);
   };
 
   const {
     handleSubmit,
     control,
+    // setValue,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: yupResolver(validationSchema) });
 
-  // };
-
   return (
-    <div>
+    <>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Add a student
+        Insert questions
       </Button>
       <Dialog
         open={open}
@@ -62,18 +62,17 @@ const AddStudentModal = ({ onSubmit, onClose, handleOpenAddModal }) => {
             Back
           </Button>
         </Typography>
-        <DialogTitle variant="h4">Enroll New Student</DialogTitle>
+        <DialogTitle variant="h4">Add questions</DialogTitle>
         <DialogContent>
           {!!errors.server && <Alert severity="error">{errors.server.message}</Alert>}
           <DialogContentText>
-            Add new student info here.
+            Pick a quiz here.
           </DialogContentText>
           <br />
-          <Typography variant="h7">Personal Information</Typography>
           <Paper sx={{ p: 2 }}>
             <FormGroup>
               <Controller
-                name="name"
+                name="text"
                 control={control}
                 render={({
                   field: {
@@ -85,66 +84,38 @@ const AddStudentModal = ({ onSubmit, onClose, handleOpenAddModal }) => {
                       <TextField
                         autoFocus
                         margin="dense"
-                        id="name"
-                        label="Name"
+                        id="text"
+                        label="Quiz"
                         type="text"
                         fullWidth
                         variant="outlined"
                         onChange={onChange}
                       />
                       {' '}
-
                     </FormControl>
                   </>
                 )}
               />
               <br />
-              <Controller
-                name="email"
-                control={control}
-                render={({
-                  field: {
-                    onChange,
-                  },
-                }) => (
-                  <>
-                    <FormControl>
-                      <TextField
-                        autoFocus
-                        margin="dense"
-                        id="email"
-                        label="Email"
-                        type="email"
-                        fullWidth
-                        variant="outlined"
-                        onChange={onChange}
-                      />
-                      {' '}
-
-                    </FormControl>
-                  </>
-                )}
-              />
             </FormGroup>
           </Paper>
         </DialogContent>
         <DialogActions>
           <Button
             onClick={handleSubmit(onSubmit)}
+            onClose={handleClickClose}
             disabled={isSubmitting}
           >
-            Add Student
+            Add Questions
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 
-AddStudentModal.propTypes = {
+InsertQuestionModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-  handleOpenAddModal: PropTypes.func.isRequired,
 };
 
-export default AddStudentModal;
+export default InsertQuestionModal;

@@ -1,7 +1,8 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import AddQuestionModal from './AddQuestionModal';
+import InsertQuestionModal from './InsertQuestionModal';
 import QuestionListDataGrid from './QuestionListDataGrid';
 
 const QuestionList = () => {
@@ -33,14 +34,20 @@ const QuestionList = () => {
   }
 
   const onSubmit = async (question) => {
-    const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Quiz`, question);
+    const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Question`, question);
     setQuestions([...questions, data]);
   };
 
   return (
     <>
-      <Typography variant="h4" sx={{ marginBottom: 2 }}>Question</Typography>
+      <Typography align="left">
+        <Button href="/quizzesadmin">
+          Back
+        </Button>
+      </Typography>
+      <Typography variant="h4" sx={{ marginBottom: 2 }}>Questions</Typography>
       <AddQuestionModal onSubmit={onSubmit} />
+      <InsertQuestionModal onSubmit={onSubmit} />
       <QuestionListDataGrid
         questions={questions}
       />

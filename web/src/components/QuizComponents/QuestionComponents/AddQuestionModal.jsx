@@ -14,44 +14,45 @@ import {
   DialogTitle,
   FormControl,
   FormGroup,
+  // MenuItem,
   Paper,
   TextField,
   Typography,
 } from '@mui/material';
 
-const AddStudentModal = ({ onSubmit, onClose, handleOpenAddModal }) => {
+const AddQuestionModal = ({ onSubmit }) => {
   const [open, setOpen] = useState(false);
 
   const validationSchema = yup.object().shape({
-    name: yup.string()
+    text: yup.string()
       .trim()
-      .required('Please enter the full name'),
-    email: yup.string()
+      .required('Please enter the question text'),
+    // questionType: yup.number()
+    //   .required('Please enter the question type'),
+    correctAnswer: yup.string()
       .trim()
-      .required('Please enter the e-mail address'),
+      .required('Please enter an answer'),
   });
 
   const handleClickOpen = () => {
     setOpen(true);
-    handleOpenAddModal();
   };
 
   const handleClickClose = () => {
-    setOpen(onClose);
+    setOpen(false);
   };
 
   const {
     handleSubmit,
     control,
+    // setValue,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: yupResolver(validationSchema) });
 
-  // };
-
   return (
-    <div>
+    <>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Add a student
+        Add questions
       </Button>
       <Dialog
         open={open}
@@ -62,18 +63,17 @@ const AddStudentModal = ({ onSubmit, onClose, handleOpenAddModal }) => {
             Back
           </Button>
         </Typography>
-        <DialogTitle variant="h4">Enroll New Student</DialogTitle>
+        <DialogTitle variant="h4">Add a new question</DialogTitle>
         <DialogContent>
           {!!errors.server && <Alert severity="error">{errors.server.message}</Alert>}
           <DialogContentText>
-            Add new student info here.
+            Enter question info here.
           </DialogContentText>
           <br />
-          <Typography variant="h7">Personal Information</Typography>
           <Paper sx={{ p: 2 }}>
             <FormGroup>
               <Controller
-                name="name"
+                name="text"
                 control={control}
                 render={({
                   field: {
@@ -85,22 +85,46 @@ const AddStudentModal = ({ onSubmit, onClose, handleOpenAddModal }) => {
                       <TextField
                         autoFocus
                         margin="dense"
-                        id="name"
-                        label="Name"
+                        id="text"
+                        label="Question Text"
                         type="text"
                         fullWidth
                         variant="outlined"
                         onChange={onChange}
                       />
                       {' '}
-
                     </FormControl>
                   </>
                 )}
               />
               <br />
+              {/* <Controller
+                name="questionType"
+                control={control}
+                render={({
+                  field: {
+                    value,
+                  },
+                }) => (
+                  <FormControl>
+                    <Select
+                      id="questionType"
+                      label="Question Type"
+                      variant="outlined"
+                      value={value}
+                      select="true"
+                      onChange={(e) => setValue('questionType', e.target.value, true)}
+                    >
+                      <MenuItem value={0}>Short Answer</MenuItem>
+                      <MenuItem value={1}>True or False</MenuItem>
+                      <MenuItem value={2}>Multilple Choice</MenuItem>
+                    </Select>
+                  </FormControl>
+                )}
+              />
+              <br /> */}
               <Controller
-                name="email"
+                name="correctAnswer"
                 control={control}
                 render={({
                   field: {
@@ -110,17 +134,14 @@ const AddStudentModal = ({ onSubmit, onClose, handleOpenAddModal }) => {
                   <>
                     <FormControl>
                       <TextField
-                        autoFocus
                         margin="dense"
-                        id="email"
-                        label="Email"
-                        type="email"
+                        id="correctAnswer"
+                        label="Correct Answer"
+                        type="text"
                         fullWidth
                         variant="outlined"
                         onChange={onChange}
                       />
-                      {' '}
-
                     </FormControl>
                   </>
                 )}
@@ -131,20 +152,19 @@ const AddStudentModal = ({ onSubmit, onClose, handleOpenAddModal }) => {
         <DialogActions>
           <Button
             onClick={handleSubmit(onSubmit)}
+            onClose={handleClickClose}
             disabled={isSubmitting}
           >
-            Add Student
+            Add Question
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 
-AddStudentModal.propTypes = {
+AddQuestionModal.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
-  handleOpenAddModal: PropTypes.func.isRequired,
 };
 
-export default AddStudentModal;
+export default AddQuestionModal;

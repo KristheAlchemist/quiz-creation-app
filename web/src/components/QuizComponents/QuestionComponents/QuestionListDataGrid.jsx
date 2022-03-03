@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DataGrid } from '@mui/x-data-grid';
 import {
-  // Card,
   Link, Paper, Typography,
 } from '@mui/material';
 
@@ -10,7 +9,7 @@ const QuestionListDataGrid = ({ questions }) => {
   const columns = [
     {
       field: 'text',
-      headerName: 'Text',
+      headerName: 'Question',
       width: 1800,
       renderCell: ({ row: { id, text } }) => (
         <Link href={`/question/${id}`}>

@@ -26,9 +26,6 @@ const AddQuizModal = ({ onSubmit }) => {
     title: yup.string()
       .trim()
       .required('Please enter a title'),
-    question: yup.string()
-      .trim()
-      .required('Please enter the e-mail address'),
   });
 
   const handleClickOpen = () => {
@@ -58,25 +55,26 @@ const AddQuizModal = ({ onSubmit }) => {
         open={open}
         onClose={onClose}
       >
-        <Button onClick={handleClickClose}>
-          Back
-        </Button>
-        <DialogTitle variant="h4">Enroll New Student</DialogTitle>
+        <Typography align="left">
+          <Button onClick={handleClickClose}>
+            Back
+          </Button>
+        </Typography>
+        <DialogTitle variant="h4">Create a new quiz</DialogTitle>
         <DialogContent>
           {!!errors.server && <Alert severity="error">{errors.server.message}</Alert>}
           <DialogContentText>
-            Add new student info here.
+            Add a title for your quiz here.
           </DialogContentText>
           <br />
-          <Typography variant="h7">Personal Information</Typography>
           <Paper sx={{ p: 2 }}>
             <FormGroup>
               <Controller
-                name="name"
+                name="title"
                 control={control}
                 render={({
                   field: {
-                    onChange, value,
+                    onChange,
                   },
                 }) => (
                   <>
@@ -84,44 +82,13 @@ const AddQuizModal = ({ onSubmit }) => {
                       <TextField
                         autoFocus
                         margin="dense"
-                        id="name"
-                        label="Name"
+                        id="title"
+                        label="Title"
                         type="text"
                         fullWidth
                         variant="outlined"
-                        value={value}
                         onChange={onChange}
                       />
-                      {' '}
-
-                    </FormControl>
-                  </>
-                )}
-              />
-              <br />
-              <Controller
-                name="email"
-                control={control}
-                render={({
-                  field: {
-                    onChange, value,
-                  },
-                }) => (
-                  <>
-                    <FormControl>
-                      <TextField
-                        autoFocus
-                        margin="dense"
-                        id="email"
-                        label="Email"
-                        type="email"
-                        fullWidth
-                        variant="outlined"
-                        value={value}
-                        onChange={onChange}
-                      />
-                      {' '}
-
                     </FormControl>
                   </>
                 )}
@@ -135,8 +102,7 @@ const AddQuizModal = ({ onSubmit }) => {
             onClose={onClose}
             disabled={isSubmitting}
           >
-            Add Student
-
+            Add Quiz
           </Button>
         </DialogActions>
       </Dialog>

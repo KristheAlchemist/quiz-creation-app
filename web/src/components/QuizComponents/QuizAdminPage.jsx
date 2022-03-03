@@ -1,9 +1,10 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import AddQuizModal from './AddQuizModal';
 import QuizListDataGrid from './QuizListDataGrid';
 
-const QuizList = () => {
+const QuizAdminPage = () => {
   const [error, setError] = useState(null);
   const [quizzes, setQuizzes] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,9 +32,20 @@ const QuizList = () => {
     return <h1>Loading...</h1>;
   }
 
+  const onSubmit = async (quiz) => {
+    console.log(quiz);
+    const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Quiz`, quiz);
+    setQuizzes([...quizzes, data]);
+  };
+
   return (
     <>
-      <Typography variant="h4" sx={{ marginBottom: 2 }}>Quizzes</Typography>
+      <Typography variant="h4" sx={{ marginBottom: 2 }}>Quiz Creation Admin Page</Typography>
+      <AddQuizModal onSubmit={onSubmit} />
+      <br />
+      <Button variant="outlined" href="/questions">
+        Add Questions
+      </Button>
       <QuizListDataGrid
         quizzes={quizzes}
       />
@@ -41,4 +53,4 @@ const QuizList = () => {
   );
 };
 
-export default QuizList;
+export default QuizAdminPage;

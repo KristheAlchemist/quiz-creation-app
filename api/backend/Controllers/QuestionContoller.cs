@@ -113,23 +113,13 @@ namespace backend.Controllers
             var questionToAdd = new Question
             {
                 Text = questionRequest.Text,
-                QuestionType = questionRequest.QuestionType,
-                // Choices = questionRequest.Choices.Select(cr =>
-                //             new Choice
-                //                 {
-                //                     Text = cr.Text,
-                //                     QuestionId = cr.QuestionId,
-                //                 }
-                //             ),
                 CorrectAnswer = questionRequest.CorrectAnswer,
-
             };
 
             await _db.Questions.AddAsync(questionToAdd);
             await _db.SaveChangesAsync();
 
             var addedQuestion = await _db.Questions
-                .Include(q => q.Choices)
                 .SingleAsync(q => q.Id == questionToAdd.Id);
 
             return new CreatedResult("api/Questions" + questionToAdd.Id, new QuestionResponse(addedQuestion));

@@ -31,7 +31,6 @@ namespace backend.Models
                 {
                     Id = choice.Id,
                     Text = choice.Text,
-
                 });
         }
     }

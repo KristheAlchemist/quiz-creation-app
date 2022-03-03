@@ -8,6 +8,9 @@ const StudentList = () => {
   const [error, setError] = useState(null);
   const [students, setStudents] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(true);
+  const handleOpenAddModal = () => setIsAddModalOpen(true);
+  const handleCloseAddModal = () => setIsAddModalOpen(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +45,13 @@ const StudentList = () => {
   return (
     <>
       <Typography variant="h4" sx={{ marginBottom: 2 }}>Students</Typography>
-      <AddStudentModal onSubmit={onSubmit} />
+      {isAddModalOpen && (
+        <AddStudentModal
+          onSubmit={onSubmit}
+          onClose={handleCloseAddModal}
+          handleOpenAddModal={handleOpenAddModal}
+        />
+      )}
       <StudentListDataGrid
         students={students}
       />
