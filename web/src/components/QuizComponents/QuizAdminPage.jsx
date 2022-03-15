@@ -33,7 +33,6 @@ const QuizAdminPage = () => {
   }
 
   const onSubmit = async (quiz) => {
-    console.log(quiz);
     const { data } = await axios.post(`${process.env.REACT_APP_BASE_API}/api/Quiz`, quiz);
     setQuizzes([...quizzes, data]);
   };

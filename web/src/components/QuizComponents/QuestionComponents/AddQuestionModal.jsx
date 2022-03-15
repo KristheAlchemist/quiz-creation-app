@@ -27,8 +27,6 @@ const AddQuestionModal = ({ onSubmit }) => {
     text: yup.string()
       .trim()
       .required('Please enter the question text'),
-    // questionType: yup.number()
-    //   .required('Please enter the question type'),
     correctAnswer: yup.string()
       .trim()
       .required('Please enter an answer'),
@@ -45,7 +43,6 @@ const AddQuestionModal = ({ onSubmit }) => {
   const {
     handleSubmit,
     control,
-    // setValue,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: yupResolver(validationSchema) });
 
